@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    Помощь
+{% endblock title %}
+
+{% block content %}
+    {% for reagent in reagents %}
+        <h2>{{reagent.name}}</h2>
+        <p>{{reagent.made_by}}</p>
+        <p>{{reagent.made_date}}</p>
+        <p>{{reagent.best_before}}</p>
+        {% for methodic in reagent.methodics.all %}
+            <p>{{methodic.name}}</p>
+        {% endfor %}
+    {% endfor %}
+{% endblock content %}
