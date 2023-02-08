@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    Методика {{methodic.name}}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{methodic.name}}</h2>
+    <p>{{methodic.acts_from}}</p>
+    <p>{{methodic.acts_to}}</p>
+    {% for reagent in methodic.used_reagents.all %}
+        <p>{{reagent.name}}</p>
+    {% endfor %}
+{% endblock content %}
