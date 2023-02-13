@@ -1,0 +1,21 @@
+{% block header %}
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'lab:methodics' %}">Методики</a>
+            </li>
+            <li>
+                <a href="{% url 'lab:reagents' %}">Реактивы</a>
+            </li>
+            <li>
+                <a href="{% url 'lab:equipment' %}">Оборудование</a>
+            </li>
+            <li>
+                <a href="{% url 'lab:contracts' %}">Договоры</a>
+            </li>
+            <li>
+                <a href="{% url 'lab:protocols' %}">Протоколы</a>
+            </li>
+        </ul>
+    </nav>
+{% endblock header %}

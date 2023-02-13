@@ -1,42 +1,63 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView
 
-from .models import Reagent, Methodic
+from .models import Reagent, Methodic, Equipment, Contract, Protocol
 
 
-class ReagentsListView(ListView):
+class ReagentsListView(LoginRequiredMixin, ListView):
     model = Reagent
     template_name = "lab/reagents_list.html"
     context_object_name = "reagents"
+    login_url = '/login/'
 
 
-class MethodicsListView(ListView):
+class MethodicsListView(LoginRequiredMixin, ListView):
     model = Methodic
     template_name = "lab/methodics_list.html"
     context_object_name = "methodics"
+    login_url = '/login/'
 
 
-class ReagentDetailView(DetailView):
+class EquipmentListView(LoginRequiredMixin, ListView):
+    model = Equipment
+    template_name = "lab/equipment_list.html"
+    context_object_name = "equipment"
+    login_url = '/login/'
+
+
+class ContractsListView(LoginRequiredMixin, ListView):
+    model = Contract
+    template_name = "lab/contracts_list.html"
+    context_object_name = "contracts"
+    login_url = '/login/'
+
+
+class ProtocolsListView(LoginRequiredMixin, ListView):
+    model = Protocol
+    template_name = "lab/protocols_list.html"
+    context_object_name = "protocols"
+    login_url = '/login/'
+
+
+class ReagentDetailView(LoginRequiredMixin, DetailView):
     model = Reagent
     template_name = "lab/reagent_detail.html"
     context_object_name = "reagent"
     pk_url_kwarg = "reagent_id"
+    login_url = '/login/'
 
 
-class MethodicDetailView(DetailView):
+class MethodicDetailView(LoginRequiredMixin, DetailView):
     model = Methodic
     template_name = 'lab/methodic_detail.html'
     context_object_name = 'methodic'
     pk_url_kwarg = 'methodic_id'
+    login_url = '/login/'
 
 
-class DashboardView(View):
+class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'lab/dashboard.html'
-
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return render(request, self.template_name)
-        else:
-            raise Http404('Недоступно для незарегистрированных пользователей')
+    login_url = '/login/'

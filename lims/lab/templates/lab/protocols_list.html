@@ -1,0 +1,16 @@
+{% extends "lab/base.html" %}
+
+{% block title %}
+    Протоколы
+{% endblock title %}
+
+{% block content %}
+    {% for protocol in protocols %}
+        <h2>{{protocol.number}}</h2>
+<!--        <p>{{methodic.acts_from}}</p>-->
+<!--        <p>{{methodic.acts_to}}</p>-->
+<!--        {% for reagent in methodic.used_reagents.all %}-->
+<!--            <p>{{reagent.name}}</p>-->
+<!--        {% endfor %}-->
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "lab/base.html" %}
+
+{% block title %}
+    Договоры
+{% endblock title %}
+
+{% block content %}
+    {% for contract in contracts %}
+        <h2>{{contract.number}}</h2>
+<!--        <p>{{methodic.acts_from}}</p>-->
+<!--        <p>{{methodic.acts_to}}</p>-->
+<!--        {% for reagent in methodic.used_reagents.all %}-->
+<!--            <p>{{reagent.name}}</p>-->
+<!--        {% endfor %}-->
+    {% endfor %}
+{% endblock content %}

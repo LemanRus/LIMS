@@ -1,0 +1,16 @@
+{% extends "lab/base.html" %}
+
+{% block title %}
+    Оборудование
+{% endblock title %}
+
+{% block content %}
+    {% for item in equipment %}
+        <h2>{{item.name}}</h2>
+<!--        <p>{{methodic.acts_from}}</p>-->
+<!--        <p>{{methodic.acts_to}}</p>-->
+<!--        {% for reagent in methodic.used_reagents.all %}-->
+<!--            <p>{{reagent.name}}</p>-->
+<!--        {% endfor %}-->
+    {% endfor %}
+{% endblock content %}
