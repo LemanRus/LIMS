@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Methodic, Reagent
+from .models import Methodic, Reagent, Equipment, TechnicalMaintenance, Protocol, Contract
 
 
 class ReagentInline(admin.TabularInline):
@@ -18,3 +18,7 @@ class MethodicAdmin(admin.ModelAdmin):
 
 admin.site.register(Methodic, MethodicAdmin)
 admin.site.register(Reagent, ReagentAdmin)
+admin.site.register(Equipment)
+admin.site.register(TechnicalMaintenance)
+admin.site.register(Protocol)
+admin.site.register(Contract)

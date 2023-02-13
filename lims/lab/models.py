@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class Methodic(models.Model):
+    name = models.CharField(max_length=200)
+    acts_from = models.DateField(blank=True, null=True)
+    acts_to = models.DateField(blank=True, null=True)
+    used_reagents = models.ManyToManyField('Reagent', blank=True, related_name='methodics')
+    used_equipment = models.ManyToManyField('Equipment', blank=True, related_name='methodics')
+
+
 class Reagent(models.Model):
     name = models.CharField(max_length=200)
     made_by = models.CharField(max_length=200)
@@ -8,12 +16,34 @@ class Reagent(models.Model):
     best_before = models.DateField(blank=True, null=True)
 
 
-
-class Methodic(models.Model):
+class Equipment(models.Model):
     name = models.CharField(max_length=200)
-    acts_from = models.DateField(blank=True, null=True)
-    acts_to = models.DateField(blank=True, null=True)
-    used_reagents = models.ManyToManyField(Reagent, blank=True, related_name='methodics')
+    last_cal = models.DateField()
+    next_cal = models.DateField()
+    cal_organisation = models.CharField(max_length=200)
+    maintenance = models.ManyToManyField('TechnicalMaintenance', blank=True, related_name='equipment')
+
+
+class TechnicalMaintenance(models.Model):
+    name = models.CharField(max_length=200)
+    type = models.CharField(choices=[('Плановое', 'Плановое'), ('Периодическое', 'Периодическое'),
+                                     ('Внеплановое', 'Внеплановое')], max_length=60)
+
+
+class Contract(models.Model):
+    number = models.CharField(max_length=200)
+    contragent = models.CharField(max_length=200)
+    date_conclusion = models.DateField()
+    date_end = models.DateField()
+    file_contract = models.FileField(blank=True, null=True)
+
+
+class Protocol(models.Model):
+    contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='protocols')
+    number = models.CharField(max_length=200)
+    act_number = models.CharField(max_length=200)
+    file_protocol = models.FileField(blank=True, null=True)
+    file_act = models.FileField(blank=True, null=True)
 
 
 

@@ -1,5 +1,7 @@
+from django.http import Http404
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views import View
+from django.views.generic import ListView, DetailView, TemplateView
 
 from .models import Reagent, Methodic
 
@@ -25,6 +27,16 @@ class ReagentDetailView(DetailView):
 
 class MethodicDetailView(DetailView):
     model = Methodic
-    template_name = "lab/methodic_detail.html"
-    context_object_name = "methodic"
-    pk_url_kwarg = "methodic_id"
+    template_name = 'lab/methodic_detail.html'
+    context_object_name = 'methodic'
+    pk_url_kwarg = 'methodic_id'
+
+
+class DashboardView(View):
+    template_name = 'lab/dashboard.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return render(request, self.template_name)
+        else:
+            raise Http404('Недоступно для незарегистрированных пользователей')
