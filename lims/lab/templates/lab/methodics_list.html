@@ -6,11 +6,7 @@
 
 {% block content %}
     {% for methodic in methodics %}
-        <h2>{{methodic.name}}</h2>
-        <p>{{methodic.acts_from}}</p>
-        <p>{{methodic.acts_to}}</p>
-        {% for reagent in methodic.used_reagents.all %}
-            <p>{{reagent.name}}</p>
-        {% endfor %}
+        <a href="{% url 'lab:methodic_detail' methodic.id %}">{{methodic.name}}</a>
+        <p>Действует до: {{methodic.acts_to}}</p>
     {% endfor %}
 {% endblock content %}
