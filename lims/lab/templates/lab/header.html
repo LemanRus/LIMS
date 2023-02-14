@@ -2,7 +2,7 @@
     <nav>
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a href="{% url 'lab:dashboard' %}" class="nav-link">Главная</a>
+                <a href="{% url 'lab:dashboard' %}" class="nav-link link-info">Главная</a>
             </li>
             <li class="nav-item">
                 <a href="{% url 'lab:methodics' %}" class="nav-link">Методики</a>
@@ -18,6 +18,9 @@
             </li>
             <li class="nav-item">
                 <a href="{% url 'lab:protocols' %}" class="nav-link">Протоколы</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'core:logout' %}" class="nav-link link-danger">Выйти</a>
             </li>
         </ul>
     </nav>
