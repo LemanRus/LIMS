@@ -6,11 +6,8 @@
 
 {% block content %}
     {% for contract in contracts %}
-        <h2>{{contract.number}}</h2>
-<!--        <p>{{methodic.acts_from}}</p>-->
-<!--        <p>{{methodic.acts_to}}</p>-->
-<!--        {% for reagent in methodic.used_reagents.all %}-->
-<!--            <p>{{reagent.name}}</p>-->
-<!--        {% endfor %}-->
+        <p>
+            <a href="{% url 'lab:contract_detail' contract.id %}">Договор {{contract.number}}</a>
+        </p>
     {% endfor %}
 {% endblock content %}

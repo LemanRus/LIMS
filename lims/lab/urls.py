@@ -15,4 +15,7 @@ urlpatterns = [
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
     path('reagents/<int:reagent_id>/', views.ReagentDetailView.as_view(), name='reagent_detail'),
     path('methodics/<int:methodic_id>/', views.MethodicDetailView.as_view(), name='methodic_detail'),
+    path('contracts/<int:contract_id>/', views.ContractDetailView.as_view(), name='contract_detail'),
+    path('protocols/<int:protocol_id>/', views.ProtocolDetailView.as_view(), name='protocol_detail'),
+    path('equipment/<int:equipment_id>/', views.EquipmentDetailView.as_view(), name='equipment_detail'),
 ]

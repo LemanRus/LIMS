@@ -58,6 +58,30 @@ class MethodicDetailView(LoginRequiredMixin, DetailView):
     login_url = '/login/'
 
 
+class ContractDetailView(LoginRequiredMixin, DetailView):
+    model = Contract
+    template_name = 'lab/contract_detail.html'
+    context_object_name = 'contract'
+    pk_url_kwarg = 'contract_id'
+    login_url = '/login/'
+
+
+class ProtocolDetailView(LoginRequiredMixin, DetailView):
+    model = Protocol
+    template_name = 'lab/protocol_detail.html'
+    context_object_name = 'protocol'
+    pk_url_kwarg = 'protocol_id'
+    login_url = '/login/'
+
+
+class EquipmentDetailView(LoginRequiredMixin, DetailView):
+    model = Equipment
+    template_name = 'lab/equipment_detail.html'
+    context_object_name = 'equipment'
+    pk_url_kwarg = 'equipment_id'
+    login_url = '/login/'
+
+
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'lab/dashboard.html'
     login_url = '/login/'

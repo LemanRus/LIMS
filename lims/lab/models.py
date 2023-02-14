@@ -37,6 +37,11 @@ class Contract(models.Model):
     date_end = models.DateField()
     file_contract = models.FileField(blank=True, null=True)
 
+    @property
+    def file_contract_url(self):
+        if self.file_contract and hasattr(self.file_contract, 'url'):
+            return self.file_contract.url
+
 
 class Protocol(models.Model):
     contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='protocols')
@@ -44,6 +49,16 @@ class Protocol(models.Model):
     act_number = models.CharField(max_length=200)
     file_protocol = models.FileField(blank=True, null=True)
     file_act = models.FileField(blank=True, null=True)
+
+    @property
+    def file_protocol_url(self):
+        if self.file_protocol and hasattr(self.file_protocol, 'url'):
+            return self.file_protocol.url
+
+    @property
+    def file_act_url(self):
+        if self.file_act and hasattr(self.file_act, 'url'):
+            return self.file_act.url
 
 
 

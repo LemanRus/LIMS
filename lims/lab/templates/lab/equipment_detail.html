@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "lab/base.html" %}
 
-</body>
-</html>
+{% block title %}
+    {{equipment.name}}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{equipment.name}}</h2>
+    <p>{{equipment.last_cal}}</p>
+    <p>{{equipment.next_cal}}</p>
+    <p>{{equipment.cal_organisation}}</p>
+    {% for maintenance in equipment.maintenance.all %}
+        <p>{{maintenance.name}}</p>
+        <p>{{maintenance.type}}</p>
+    {% endfor %}
+{% endblock content %}

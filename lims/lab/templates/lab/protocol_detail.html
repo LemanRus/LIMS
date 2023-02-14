@@ -1,0 +1,13 @@
+{% extends "lab/base.html" %}
+
+{% block title %}
+    Протокол {{protocol.number}}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{protocol.number}}</h2>
+    <p>{{protocol.act_number}}</p>
+    <p>{{protocol.file_protocol_url}}</p>
+    <p>{{protocol.file_act_url}}</p>
+    <a href="{% url 'lab:contract_detail' protocol.contract.id %}">Договор {{protocol.contract.number}}</a>
+{% endblock content %}

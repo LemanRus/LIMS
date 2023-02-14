@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "lab/base.html" %}
 
-</body>
-</html>
+{% block title %}
+    Договор {{contract.number}}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{contract.number}}</h2>
+    <p>{{contract.contragent}}</p>
+    <p>{{contract.date_conclusion}}</p>
+    <p>{{contract.date_end}}</p>
+    <p>
+        <a href="{{ contract.file_contract_url }}">Файл договора</a>
+    </p>
+    {% for protocol in contract.protocols.all %}
+        <a href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{protocol.number}}</a>
+    {% endfor %}
+{% endblock content %}

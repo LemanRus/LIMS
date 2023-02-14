@@ -6,7 +6,7 @@
 
 {% block content %}
     {% for protocol in protocols %}
-        <h2>{{protocol.number}}</h2>
+        <a href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{protocol.number}}</a>
 <!--        <p>{{methodic.acts_from}}</p>-->
 <!--        <p>{{methodic.acts_to}}</p>-->
 <!--        {% for reagent in methodic.used_reagents.all %}-->
