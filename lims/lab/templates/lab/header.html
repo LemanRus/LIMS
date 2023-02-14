@@ -1,20 +1,23 @@
 {% block header %}
     <nav>
-        <ul>
-            <li>
-                <a href="{% url 'lab:methodics' %}">Методики</a>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a href="{% url 'lab:dashboard' %}" class="nav-link">Главная</a>
             </li>
-            <li>
-                <a href="{% url 'lab:reagents' %}">Реактивы</a>
+            <li class="nav-item">
+                <a href="{% url 'lab:methodics' %}" class="nav-link">Методики</a>
             </li>
-            <li>
-                <a href="{% url 'lab:equipment' %}">Оборудование</a>
+            <li class="nav-item">
+                <a href="{% url 'lab:reagents' %}" class="nav-link">Реактивы</a>
             </li>
-            <li>
-                <a href="{% url 'lab:contracts' %}">Договоры</a>
+            <li class="nav-item">
+                <a href="{% url 'lab:equipment' %}" class="nav-link">Оборудование</a>
             </li>
-            <li>
-                <a href="{% url 'lab:protocols' %}">Протоколы</a>
+            <li class="nav-item">
+                <a href="{% url 'lab:contracts' %}" class="nav-link">Договоры</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'lab:protocols' %}" class="nav-link">Протоколы</a>
             </li>
         </ul>
     </nav>
