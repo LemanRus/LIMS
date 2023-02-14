@@ -8,12 +8,18 @@ class Methodic(models.Model):
     used_reagents = models.ManyToManyField('Reagent', blank=True, related_name='methodics')
     used_equipment = models.ManyToManyField('Equipment', blank=True, related_name='methodics')
 
+    def __str__(self):
+        return f'Методика "{self.name}"'
+
 
 class Reagent(models.Model):
     name = models.CharField(max_length=200)
     made_by = models.CharField(max_length=200)
     made_date = models.DateField(blank=True, null=True)
     best_before = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Equipment(models.Model):
@@ -23,11 +29,17 @@ class Equipment(models.Model):
     cal_organisation = models.CharField(max_length=200)
     maintenance = models.ManyToManyField('TechnicalMaintenance', blank=True, related_name='equipment')
 
+    def __str__(self):
+        return self.name
+
 
 class TechnicalMaintenance(models.Model):
     name = models.CharField(max_length=200)
     type = models.CharField(choices=[('Плановое', 'Плановое'), ('Периодическое', 'Периодическое'),
                                      ('Внеплановое', 'Внеплановое')], max_length=60)
+
+    def __str__(self):
+        return f'{self.name}, {self.type}'
 
 
 class Contract(models.Model):
@@ -36,6 +48,9 @@ class Contract(models.Model):
     date_conclusion = models.DateField()
     date_end = models.DateField()
     file_contract = models.FileField(blank=True, null=True)
+
+    def __str__(self):
+        return f'Договор {self.number} с «{self.contragent}»'
 
     @property
     def file_contract_url(self):
@@ -49,6 +64,9 @@ class Protocol(models.Model):
     act_number = models.CharField(max_length=200)
     file_protocol = models.FileField(blank=True, null=True)
     file_act = models.FileField(blank=True, null=True)
+
+    def __str__(self):
+        return f'Протокол {self.number}'
 
     @property
     def file_protocol_url(self):
