@@ -37,6 +37,7 @@ class TechnicalMaintenance(models.Model):
     name = models.CharField(max_length=200)
     type = models.CharField(choices=[('Плановое', 'Плановое'), ('Периодическое', 'Периодическое'),
                                      ('Внеплановое', 'Внеплановое')], max_length=60)
+    next_date = models.DateField()
 
     def __str__(self):
         return f'{self.name}, {self.type}'

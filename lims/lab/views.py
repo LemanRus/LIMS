@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView
 
-from .models import Reagent, Methodic, Equipment, Contract, Protocol
+from .models import Reagent, Methodic, Equipment, Contract, Protocol, TechnicalMaintenance
 
 
 class ReagentsListView(LoginRequiredMixin, ListView):
@@ -85,3 +85,6 @@ class EquipmentDetailView(LoginRequiredMixin, DetailView):
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'lab/dashboard.html'
     login_url = '/login/'
+    last_protocols_query = Protocol.objects.all()
+    recent_maintenance_query = TechnicalMaintenance.objects.order_by('next_date')
+    extra_context = {"test": "Test test", "protocols": last_protocols_query, "next_maintenances": recent_maintenance_query}
