@@ -49,13 +49,21 @@ class InvoicesInline(admin.TabularInline):
 class BidAdmin(admin.ModelAdmin):
     inlines = [InvoicesInline]
     exclude = ['invoices']
-    list_display = ['number', 'get_contracts', 'get_invoices']
+    list_display = ['__str__', 'get_contract', 'get_invoices']
 
     def get_invoices(self, obj):
-        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_invoice_change", args=(item.pk,))}">{item.__str__()}</a>' for item in obj.invoices.all()]))
+        return mark_safe('; '.join([
+            f'<a href="{reverse("admin:lab_invoice_change", args=(item.pk,))}">{item.__str__()}</a>'
+            for item in obj.invoices.all()
+        ]))
 
-    def get_contracts(self, obj):
-        return mark_safe(f'<a href="{reverse("admin:lab_contract_change", args=(obj.contract.pk,))}">{obj.contract.__str__()}</a>')
+    def get_contract(self, obj):
+        return mark_safe(
+            f'<a href="{reverse("admin:lab_contract_change", args=(obj.contract.pk,))}">{obj.contract.__str__()}</a>'
+        )
+
+    get_invoices.short_description = 'Счета'
+    get_contract.short_description = 'Договоры'
 
 
 class ContractAdmin(admin.ModelAdmin):
@@ -63,10 +71,16 @@ class ContractAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'get_bids', 'get_invoices']
 
     def get_bids(self, obj):
-        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_bid_change", args=(item.pk,))}">{item.__str__()}</a>' for item in obj.bids.all()]))
+        return mark_safe('; '.join([
+            f'<a href="{reverse("admin:lab_bid_change", args=(item.pk,))}">{item.__str__()}</a>'
+            for item in obj.bids.all()
+        ]))
 
     def get_invoices(self, obj):
-        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_invoice_change", args=(item.pk,))}">{item.__str__()}</a>' for item in self.list_all_invoices(obj)]))
+        return mark_safe('; '.join([
+            f'<a href="{reverse("admin:lab_invoice_change", args=(item.pk,))}">{item.__str__()}</a>'
+            for item in self.list_all_invoices(obj)
+        ]))
 
     def list_all_invoices(self, obj):
         invoices = []
@@ -75,15 +89,27 @@ class ContractAdmin(admin.ModelAdmin):
                 invoices.append(invoice)
         return invoices
 
+    get_invoices.short_description = 'Счета'
+    get_bids.short_description = 'Заявки'
+
 
 class InvoiceAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'get_bids', 'get_contract']
 
     def get_bids(self, obj):
-        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_bid_change", args=(item.pk,))}">{item.__str__()}</a>' for item in obj.bids.all()]))
+        return mark_safe('; '.join([
+            f'<a href="{reverse("admin:lab_bid_change", args=(item.pk,))}">{item.__str__()}</a>'
+            for item in obj.bids.all()
+        ]))
 
     def get_contract(self, obj):
-        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_contract_change", args=(item.contract.pk,))}">{item.contract.__str__()}</a>' for item in obj.bids.all()]))
+        return mark_safe('; '.join([
+            f'<a href="{reverse("admin:lab_contract_change", args=(item.contract.pk,))}">{item.contract.__str__()}</a>'
+            for item in obj.bids.all()
+        ]))
+
+    get_bids.short_description = 'Заявки'
+    get_contract.short_description = 'Договоры'
 
 
 admin.site.register(Methodic, MethodicAdmin)

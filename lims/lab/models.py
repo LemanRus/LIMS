@@ -11,6 +11,10 @@ class Methodic(models.Model):
     def __str__(self):
         return f'Методика "{self.name}"'
 
+    class Meta:
+        verbose_name = 'Методика'
+        verbose_name_plural = 'Методики'
+
 
 class Reagent(models.Model):
     name = models.CharField(max_length=200)
@@ -20,6 +24,10 @@ class Reagent(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Реактив'
+        verbose_name_plural = 'Реактивы'
 
 
 class Equipment(models.Model):
@@ -32,6 +40,10 @@ class Equipment(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Оборудование'
+        verbose_name_plural = 'Оборудование'
+
 
 class TechnicalMaintenance(models.Model):
     name = models.CharField(max_length=200)
@@ -41,6 +53,10 @@ class TechnicalMaintenance(models.Model):
 
     def __str__(self):
         return f'{self.name}, {self.type}'
+
+    class Meta:
+        verbose_name = 'Техническое обслуживание'
+        verbose_name_plural = 'Техническое обслуживание'
 
 
 class Contract(models.Model):
@@ -57,6 +73,10 @@ class Contract(models.Model):
     def file_contract_url(self):
         if self.file_contract and hasattr(self.file_contract, 'url'):
             return self.file_contract.url
+
+    class Meta:
+        verbose_name = 'Договор'
+        verbose_name_plural = 'Договоры'
 
 
 class Protocol(models.Model):
@@ -79,6 +99,10 @@ class Protocol(models.Model):
         if self.file_act and hasattr(self.file_act, 'url'):
             return self.file_act.url
 
+    class Meta:
+        verbose_name = 'Протокол'
+        verbose_name_plural = 'Протоколы'
+
 
 class Bid(models.Model):
     contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='bids')
@@ -88,7 +112,11 @@ class Bid(models.Model):
                                      ('p', 'Выполняется')], max_length=60, default='p')
 
     def __str__(self):
-        return f'Заявка {self.number} ({self.status})'
+        return f'Заявка {self.number} ({self.get_status_display()})'
+
+    class Meta:
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки'
 
 
 class Invoice(models.Model):
@@ -99,5 +127,6 @@ class Invoice(models.Model):
     def __str__(self):
         return f'Счёт {self.number} ({self.get_status_display()})'
 
-
-
+    class Meta:
+        verbose_name = 'Счёт'
+        verbose_name_plural = 'Счета'
