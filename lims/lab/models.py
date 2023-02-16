@@ -88,7 +88,7 @@ class Bid(models.Model):
                                      ('p', 'Выполняется')], max_length=60, default='p')
 
     def __str__(self):
-        return f'Заявка {self.number}'
+        return f'Заявка {self.number} ({self.status})'
 
 
 class Invoice(models.Model):
@@ -97,7 +97,7 @@ class Invoice(models.Model):
                                        ('w', 'В процессе')], max_length=60, default='w')
 
     def __str__(self):
-        return f'Счёт {self.number}'
+        return f'Счёт {self.number} ({self.get_status_display()})'
 
 
 

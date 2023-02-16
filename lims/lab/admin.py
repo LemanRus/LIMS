@@ -49,24 +49,41 @@ class InvoicesInline(admin.TabularInline):
 class BidAdmin(admin.ModelAdmin):
     inlines = [InvoicesInline]
     exclude = ['invoices']
-    list_display = ['number', 'contract', 'get_invoices']
+    list_display = ['number', 'get_contracts', 'get_invoices']
 
     def get_invoices(self, obj):
-        return "; ".join([invoice.__str__() for invoice in obj.invoices.all()])
+        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_invoice_change", args=(item.pk,))}">{item.__str__()}</a>' for item in obj.invoices.all()]))
+
+    def get_contracts(self, obj):
+        return mark_safe(f'<a href="{reverse("admin:lab_contract_change", args=(obj.contract.pk,))}">{obj.contract.__str__()}</a>')
 
 
 class ContractAdmin(admin.ModelAdmin):
     inlines = [BidInline]
-    list_display = ['__str__', 'get_bids']
+    list_display = ['__str__', 'get_bids', 'get_invoices']
 
     def get_bids(self, obj):
-        return mark_safe('; '.join([i for i in self.bids_links(obj)]))
+        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_bid_change", args=(item.pk,))}">{item.__str__()}</a>' for item in obj.bids.all()]))
 
-    def bids_links(self, obj):
-        links = [f'<a href="{reverse("admin:lab_bid_change", args=(item.pk,))}">{item.__str__()}</a>' for item in obj.bids.all()]
-        return links
+    def get_invoices(self, obj):
+        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_invoice_change", args=(item.pk,))}">{item.__str__()}</a>' for item in self.list_all_invoices(obj)]))
 
-    bids_links.short_description = 'bid'
+    def list_all_invoices(self, obj):
+        invoices = []
+        for bid in obj.bids.all():
+            for invoice in bid.invoices.all():
+                invoices.append(invoice)
+        return invoices
+
+
+class InvoiceAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'get_bids', 'get_contract']
+
+    def get_bids(self, obj):
+        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_bid_change", args=(item.pk,))}">{item.__str__()}</a>' for item in obj.bids.all()]))
+
+    def get_contract(self, obj):
+        return mark_safe('; '.join([f'<a href="{reverse("admin:lab_contract_change", args=(item.contract.pk,))}">{item.contract.__str__()}</a>' for item in obj.bids.all()]))
 
 
 admin.site.register(Methodic, MethodicAdmin)
@@ -76,4 +93,4 @@ admin.site.register(TechnicalMaintenance, TechnicalMaintenanceAdmin)
 admin.site.register(Protocol)
 admin.site.register(Contract, ContractAdmin)
 admin.site.register(Bid, BidAdmin)
-admin.site.register(Invoice)
+admin.site.register(Invoice, InvoiceAdmin)
