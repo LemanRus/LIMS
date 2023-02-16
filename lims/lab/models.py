@@ -80,4 +80,24 @@ class Protocol(models.Model):
             return self.file_act.url
 
 
+class Bid(models.Model):
+    contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='bids')
+    number = models.CharField(max_length=200)
+    invoices = models.ManyToManyField('Invoice', related_name='bids')
+    status = models.CharField(choices=[('c', 'Исполнена'), ('r', 'Отклонена'),
+                                     ('p', 'Выполняется')], max_length=60, default='p')
+
+    def __str__(self):
+        return f'Заявка {self.number}'
+
+
+class Invoice(models.Model):
+    number = models.CharField(max_length=200)
+    status = models.CharField(choices=[('p', 'Оплачен'), ('b', 'Задолженность'),
+                                       ('w', 'В процессе')], max_length=60, default='w')
+
+    def __str__(self):
+        return f'Счёт {self.number}'
+
+
 
