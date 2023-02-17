@@ -5,16 +5,18 @@
 {% endblock title %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <p>Вы вошли как {{user.username}}</p>
-    {% endif %}
-    <h1>LIMS скоро будет здесь!</h1>
-    <p>Оставайтесь с нами и будьте терпеливы.</p>
-    <a href="{% url 'core:help' %}">Помощь</a>
-    {% if user.is_authenticated %}
-        <a href="{% url 'lab:dashboard' %}">Панель управления</a>
-        <a href="{% url 'core:logout' %}">Выйти из системы</a>
-    {% else %}
-        <a href="{% url 'core:login' %}">Войти в систему</a>
-    {% endif %}
+    <section class="wrapper">
+        {% if user.is_authenticated %}
+            <p>Вы вошли как {{user.username}}</p>
+        {% endif %}
+        <h1>LIMS скоро будет здесь!</h1>
+        <p>Оставайтесь с нами и будьте терпеливы.</p>
+        <a href="{% url 'core:help' %}">Помощь</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'lab:dashboard' %}">Панель управления</a>
+            <a href="{% url 'core:logout' %}">Выйти из системы</a>
+        {% else %}
+            <a href="{% url 'core:login' %}">Войти в систему</a>
+        {% endif %}
+    </section>
 {% endblock content %}
