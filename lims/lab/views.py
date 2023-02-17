@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse, reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView
 
+from .forms import MethodicCreateForm
 from .models import Reagent, Methodic, Equipment, Contract, Protocol, TechnicalMaintenance
 
 
@@ -56,6 +58,12 @@ class MethodicDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'methodic'
     pk_url_kwarg = 'methodic_id'
     login_url = '/login/'
+
+
+class MethodicCreateView(LoginRequiredMixin, CreateView):
+    form_class = MethodicCreateForm
+    template_name = 'lab/methodic_create.html'
+    success_url = reverse_lazy('lab:methodics')
 
 
 class ContractDetailView(LoginRequiredMixin, DetailView):

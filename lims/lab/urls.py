@@ -9,6 +9,7 @@ urlpatterns = [
     path('', TemplateView.as_view(), name='home'),
     path('reagents/', views.ReagentsListView.as_view(), name='reagents'),
     path('methodics/', views.MethodicsListView.as_view(), name='methodics'),
+    path('methodics/create/', views.MethodicCreateView.as_view(), name='methodic_create'),
     path('equipment/', views.EquipmentListView.as_view(), name='equipment'),
     path('contracts/', views.ContractsListView.as_view(), name='contracts'),
     path('protocols/', views.ProtocolsListView.as_view(), name='protocols'),
