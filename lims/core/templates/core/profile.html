@@ -1,0 +1,18 @@
+{% extends "lab/base.html" %}
+
+{% block title %}
+    {{profile.username}}
+{% endblock title %}
+
+{% block content %}
+    <h1>Info about {{profile}}</h1>
+    {% if profile.photo %}
+        <img src="{{ profile.photo.url }}" alt="photo" class="profile__photo">
+    {% endif %}
+    <div class="profile__credentials">
+        <p>Имя: {{profile.first_name}} {{ profile.last_name }}</p>
+        <p>E-mail: {{profile.email}}</p>
+        <p>Телефон: {{profile.telephone}}</p>
+        <p>Дата рождения: {{profile.birth_date|date:"d F Y"}}</p>
+    </div>
+{% endblock content %}

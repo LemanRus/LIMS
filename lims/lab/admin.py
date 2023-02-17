@@ -112,11 +112,16 @@ class InvoiceAdmin(admin.ModelAdmin):
     get_contract.short_description = 'Договоры'
 
 
+class ProtocolAdmin(admin.ModelAdmin):
+    pass
+
+
+
 admin.site.register(Methodic, MethodicAdmin)
 admin.site.register(Reagent, ReagentAdmin)
 admin.site.register(Equipment, EquipmentAdmin)
 admin.site.register(TechnicalMaintenance, TechnicalMaintenanceAdmin)
-admin.site.register(Protocol)
+admin.site.register(Protocol, ProtocolAdmin)
 admin.site.register(Contract, ContractAdmin)
 admin.site.register(Bid, BidAdmin)
 admin.site.register(Invoice, InvoiceAdmin)

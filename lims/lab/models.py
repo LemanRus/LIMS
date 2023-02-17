@@ -1,5 +1,7 @@
 from django.db import models
 
+from core.models import CustomUser
+
 
 class Methodic(models.Model):
     name = models.CharField(max_length=200)
@@ -80,6 +82,7 @@ class Contract(models.Model):
 
 
 class Protocol(models.Model):
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='protocols', default=CustomUser.objects.first().pk)
     contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='protocols')
     number = models.CharField(max_length=200)
     act_number = models.CharField(max_length=200)

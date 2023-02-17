@@ -20,6 +20,9 @@
                 <a href="{% url 'lab:protocols' %}" class="nav-link">Протоколы</a>
             </li>
             <li class="nav-item">
+                <a href="{% url 'core:profile' user.id %}" class="nav-link link-warning">Профиль</a>
+            </li>
+            <li class="nav-item">
                 <a href="{% url 'core:logout' %}" class="nav-link link-danger">Выйти</a>
             </li>
         </ul>

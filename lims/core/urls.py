@@ -10,4 +10,5 @@ urlpatterns = [
     path('help/', views.HelpPageView.as_view(), name='help'),
     path('login/', LoginView.as_view(template_name='core/login.html'), name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('profile/<int:profile_id>', views.ProfileView.as_view(), name='profile'),
 ]
