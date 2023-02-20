@@ -5,8 +5,8 @@ from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 
-from .forms import MethodicCreateForm
-from .models import Reagent, Methodic, Equipment, Contract, Protocol, TechnicalMaintenance
+from .forms import *
+from .models import Reagent, Methodic, Equipment, Contract, Protocol, TechnicalMaintenance, Bid, Invoice
 
 
 class ReagentsListView(LoginRequiredMixin, ListView):
@@ -52,6 +52,12 @@ class ReagentDetailView(LoginRequiredMixin, DetailView):
     login_url = '/login/'
 
 
+class ReagentCreateView(LoginRequiredMixin, CreateView):
+    model = Reagent
+    form_class = ReagentCreateForm
+    login_url = '/login/'
+
+
 class MethodicDetailView(LoginRequiredMixin, DetailView):
     model = Methodic
     template_name = 'lab/methodic_detail.html'
@@ -64,6 +70,7 @@ class MethodicCreateView(LoginRequiredMixin, CreateView):
     form_class = MethodicCreateForm
     template_name = 'lab/methodic_create.html'
     success_url = reverse_lazy('lab:methodics')
+    login_url = '/login/'
 
 
 class ContractDetailView(LoginRequiredMixin, DetailView):
@@ -71,6 +78,12 @@ class ContractDetailView(LoginRequiredMixin, DetailView):
     template_name = 'lab/contract_detail.html'
     context_object_name = 'contract'
     pk_url_kwarg = 'contract_id'
+    login_url = '/login/'
+
+
+class ContractCreateView(LoginRequiredMixin, CreateView):
+    model = Contract
+    form_class = ContractCreateForm
     login_url = '/login/'
 
 
@@ -82,11 +95,70 @@ class ProtocolDetailView(LoginRequiredMixin, DetailView):
     login_url = '/login/'
 
 
+class ProtocolCreateView(LoginRequiredMixin, CreateView):
+    model = Protocol
+    login_url = '/login/'
+
+
 class EquipmentDetailView(LoginRequiredMixin, DetailView):
     model = Equipment
     template_name = 'lab/equipment_detail.html'
     context_object_name = 'equipment'
     pk_url_kwarg = 'equipment_id'
+    login_url = '/login/'
+
+
+class EquipmentCreateView(LoginRequiredMixin, CreateView):
+    model = Equipment
+    form_class = EquipmentCreateForm
+    login_url = '/login/'
+
+
+class BidsListView(LoginRequiredMixin, ListView):
+    model = Bid
+    template_name = "lab/bids_list.html"
+    context_object_name = "bids"
+    login_url = '/login/'
+
+
+class BidDetailView(LoginRequiredMixin, DetailView):
+    model = Bid
+    template_name = 'lab/bid_detail.html'
+    context_object_name = 'bid'
+    pk_url_kwarg = 'bid_id'
+    login_url = '/login/'
+
+
+class BidCreateView(LoginRequiredMixin, CreateView):
+    model = Bid
+    form_class = BidCreateForm
+    login_url = '/login/'
+
+
+class InvoiceDetailView(LoginRequiredMixin, DetailView):
+    model = Invoice
+    template_name = 'lab/invoice_detail.html'
+    context_object_name = 'invoice'
+    pk_url_kwarg = 'invoice_id'
+    login_url = '/login/'
+
+
+class InvoiceCreateView(LoginRequiredMixin, CreateView):
+    model = Invoice
+    form_class = InvoiceCreateForm
+    login_url = '/login/'
+
+
+class InvoicesListView(LoginRequiredMixin, ListView):
+    model = Invoice
+    template_name = "lab/invoices_list.html"
+    context_object_name = "invoices"
+    login_url = '/login/'
+
+
+class MaintenanceCreateView(LoginRequiredMixin, CreateView):
+    model = TechnicalMaintenance
+    form_class = MaintenanceCreateForm
     login_url = '/login/'
 
 
@@ -96,3 +168,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     last_protocols_query = Protocol.objects.all()
     recent_maintenance_query = TechnicalMaintenance.objects.order_by('next_date')
     extra_context = {"test": "Test test", "protocols": last_protocols_query, "next_maintenances": recent_maintenance_query}
+
+
+class NotebookView(LoginRequiredMixin, TemplateView):
+    template_name = 'lab/notebook.html'
+    login_url = '/login/'
+

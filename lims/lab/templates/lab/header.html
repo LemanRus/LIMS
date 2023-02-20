@@ -17,7 +17,16 @@
                 <a href="{% url 'lab:contracts' %}" class="nav-link">Договоры</a>
             </li>
             <li class="nav-item">
+                <a href="{% url 'lab:bids' %}" class="nav-link">Заявки</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'lab:invoices' %}" class="nav-link">Счета</a>
+            </li>
+            <li class="nav-item">
                 <a href="{% url 'lab:protocols' %}" class="nav-link">Протоколы</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'lab:notebook' %}" class="nav-link link-secondary">Лабораторный журнал</a>
             </li>
             <li class="nav-item">
                 <a href="{% url 'core:profile' user.id %}" class="nav-link link-warning">Профиль</a>
