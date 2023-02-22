@@ -6,7 +6,6 @@ from .models import Methodic, Reagent, Equipment, Protocol, TechnicalMaintenance
 
 
 class MethodicCreateForm(forms.ModelForm):
-
     class Meta:
         model = Methodic
         fields = '__all__'
@@ -67,6 +66,19 @@ class InvoiceCreateForm(forms.ModelForm):
 
 
 class MaintenanceCreateForm(forms.ModelForm):
+    equipment = forms.ModelMultipleChoiceField(
+        queryset=Equipment.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
+
     class Meta:
         model = TechnicalMaintenance
         fields = '__all__'
+        widgets = {
+            'next_date': forms.SelectDateWidget(
+            ),
+        }
+        labels = {
+            'equipment': 'Относится к оборудованию'
+        }
+

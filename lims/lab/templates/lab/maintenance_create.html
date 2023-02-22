@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'lab/base.html' %}
 
-</body>
-</html>
+{% block title %}
+    Создать техобслуживание
+{% endblock title %}
+
+{% block content %}
+    <form action="{% url 'lab:maintenance_create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{{form.errors}}</p>
+        <p>Название: {{form.name}}</p>
+        <p>Тип: {{form.type}}</p>
+        <p>Дата следующего обслуживания: {{form.next_date}}</p>
+        <p>Относится к оборудованию:</p>
+        <p>{{form.equipment}} Не нашли в списке? <a href="{% url 'lab:equipment_create'">Добавить</a></p>
+        <input type="submit" value="OK">
+    </form>
+{% endblock content %}

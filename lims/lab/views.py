@@ -111,6 +111,7 @@ class EquipmentDetailView(LoginRequiredMixin, DetailView):
 class EquipmentCreateView(LoginRequiredMixin, CreateView):
     model = Equipment
     form_class = EquipmentCreateForm
+    template_name = 'lab/equipment_create.html'
     login_url = '/login/'
 
 
@@ -157,8 +158,9 @@ class InvoicesListView(LoginRequiredMixin, ListView):
 
 
 class MaintenanceCreateView(LoginRequiredMixin, CreateView):
-    model = TechnicalMaintenance
     form_class = MaintenanceCreateForm
+    template_name = 'lab/maintenance_create.html'
+    success_url = reverse_lazy('lab:equipment')
     login_url = '/login/'
 
 

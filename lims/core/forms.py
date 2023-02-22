@@ -15,11 +15,3 @@ class PasswordResetValidateForm(forms.ModelForm):
             'secret_answer': 'Ответ',
             'password': 'Введите новый пароль',
         }
-
-    # def clean_email(self):
-    #     email = self.cleaned_data.get('email')
-    #     if not email:
-    #         raise forms.ValidationError('Enter email!')
-    #     if email and not CustomUser.objects.filter(email=email).exists():
-    #         raise forms.ValidationError('Email doesn\'t exist. Please sign up')
-    #     return email
