@@ -24,9 +24,9 @@ class TechnicalMaintenanceInline(admin.TabularInline):
     extra = 0
 
 
-class TechnicalMaintenanceAdmin(admin.ModelAdmin):
-    def get_model_perms(self, request):
-        return {}
+# class TechnicalMaintenanceAdmin(admin.ModelAdmin):
+#     def get_model_perms(self, request):
+#         return {}
 
 
 class EquipmentAdmin(admin.ModelAdmin):
@@ -120,7 +120,7 @@ class ProtocolAdmin(admin.ModelAdmin):
 admin.site.register(Methodic, MethodicAdmin)
 admin.site.register(Reagent, ReagentAdmin)
 admin.site.register(Equipment, EquipmentAdmin)
-admin.site.register(TechnicalMaintenance, TechnicalMaintenanceAdmin)
+admin.site.register(TechnicalMaintenance)
 admin.site.register(Protocol, ProtocolAdmin)
 admin.site.register(Contract, ContractAdmin)
 admin.site.register(Bid, BidAdmin)
