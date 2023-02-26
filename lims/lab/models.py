@@ -37,7 +37,6 @@ class Equipment(models.Model):
     last_cal = models.DateField()
     next_cal = models.DateField()
     cal_organisation = models.CharField(max_length=200)
-    maintenance = models.ManyToManyField('TechnicalMaintenance', blank=True, related_name='equipment')
 
     def __str__(self):
         return self.name
@@ -52,6 +51,7 @@ class TechnicalMaintenance(models.Model):
     type = models.CharField(choices=[('Плановое', 'Плановое'), ('Периодическое', 'Периодическое'),
                                      ('Внеплановое', 'Внеплановое')], max_length=60)
     next_date = models.DateField()
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name='maintenance')
 
     def __str__(self):
         return f'{self.name}, {self.type}'

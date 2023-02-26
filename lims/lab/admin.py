@@ -20,7 +20,7 @@ class MethodicAdmin(admin.ModelAdmin):
 
 
 class TechnicalMaintenanceInline(admin.TabularInline):
-    model = Equipment.maintenance.through
+    model = TechnicalMaintenance
     extra = 0
 
 

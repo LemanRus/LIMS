@@ -163,23 +163,27 @@ class MaintenanceCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('lab:equipment')
     login_url = '/login/'
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, request.FILES)
-        context = {}
-        if form.is_valid():
-            maintenance = form.save(commit=False)
-            maintenance.save()
-            print(form.cleaned_data)
-            for eq in form.cleaned_data.get('equipment'):
-                eq.maintenance.add(*TechnicalMaintenance.objects.filter(pk=maintenance.pk))
-                print(maintenance)
-                eq.save()
-            context['form'] = self.form_class
-            return redirect(reverse('lab:equipment'))
-        else:
-            context['form'] = self.form_class
-
+    def get(self, request, *args, **kwargs):
+        context = {'form': self.form_class(initial=request.GET)}
         return render(request, self.template_name, context)
+
+    # def post(self, request, *args, **kwargs):
+    #     form = self.form_class(request.POST, request.FILES)
+    #     context = {}
+    #     if form.is_valid():
+    #         maintenance = form.save(commit=False)
+    #         maintenance.save()
+    #         print(form.cleaned_data)
+    #         for eq in form.cleaned_data.get('equipment'):
+    #             eq.maintenance.add(*TechnicalMaintenance.objects.filter(pk=maintenance.pk))
+    #             print(maintenance)
+    #             eq.save()
+    #         context['form'] = self.form_class
+    #         return redirect(reverse('lab:equipment'))
+    #     else:
+    #         context['form'] = self.form_class
+
+        # return render(request, self.template_name, context)
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):

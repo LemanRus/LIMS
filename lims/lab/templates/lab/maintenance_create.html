@@ -12,7 +12,7 @@
         <p>Тип: {{form.type}}</p>
         <p>Дата следующего обслуживания: {{form.next_date}}</p>
         <p>Относится к оборудованию:</p>
-        <p>{{form.equipment}} Не нашли в списке? <a href="{% url 'lab:equipment_create'">Добавить</a></p>
+        <p>{{form.equipment}} Не нашли в списке? <a href="{% url 'lab:equipment_create' %}">Добавить</a></p>
         <input type="submit" value="OK">
     </form>
 {% endblock content %}

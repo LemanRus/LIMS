@@ -14,9 +14,7 @@
         <h3>Предстоящие технические обслуживания:</h3>
         {% for maintenance in next_maintenances %}
             <h4>{{maintenance.name}}, {{maintenance.next_date}}</h4>
-            {% for equipment in maintenance.equipment.all %}
-                <a href="{% url 'lab:equipment_detail' equipment.id %}">{{ equipment.name }}</a>
-            {% endfor %}
+            <a href="{% url 'lab:equipment_detail' maintenance.equipment.id %}">{{ maintenance.equipment.name }}</a>
         {% endfor %}
     </section>
 {% endblock content %}

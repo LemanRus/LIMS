@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "lab/base.html" %}
 
-</body>
-</html>
+{% block title %}
+    Методики
+{% endblock title %}
+
+{% block content %}
+    <h1>Методики</h1>
+    {% for methodic in methodics %}
+        <a href="{% url 'lab:methodic_detail' methodic.id %}">{{methodic.name}}</a>
+        <p>Действует до: {{methodic.acts_to}}</p>
+    {% endfor %}
+        <a href="{% url 'lab:methodic_create' %}">Добавить методику</a>
+{% endblock content %}
