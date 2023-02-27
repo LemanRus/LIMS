@@ -88,6 +88,7 @@ class Protocol(models.Model):
     act_number = models.CharField(max_length=200)
     file_protocol = models.FileField(blank=True, null=True)
     file_act = models.FileField(blank=True, null=True)
+    close_date = models.DateTimeField()
 
     def __str__(self):
         return f'Протокол {self.number}'
@@ -133,3 +134,20 @@ class Invoice(models.Model):
     class Meta:
         verbose_name = 'Счёт'
         verbose_name_plural = 'Счета'
+
+
+def notebook_record_file_path(instance, filename):
+    user_id = instance.id
+    return f'user_files/user-{user_id}/{filename}'
+
+
+class Record(models.Model):
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='records')
+    text = models.TextField(max_length=5000)
+    file = models.FileField(upload_to=notebook_record_file_path, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def file_record_url(self):
+        if self.file and hasattr(self.file, 'url'):
+            return self.file.url

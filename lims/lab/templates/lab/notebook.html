@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "lab/base.html" %}
 
-</body>
-</html>
+{% block title %}
+    Лабораторный журнал
+{% endblock title %}
+
+{% block content %}
+    <section>
+        <h2>Лабораторный журнал</h2>
+        <h3>Записи:</h3>
+        {% for record in records %}
+            <h4>Запись автора {{record.author}} от {{record.date_created}}:</h4>
+            <p>{{record.text}}</p>
+            {% if record.file_record_url %}
+                <p>
+                    <a href="{{ record.file_record_url }}">Приложенный файл</a>
+                </p>
+            {% endif %}
+        {% endfor %}
+    </section>
+{% endblock content %}

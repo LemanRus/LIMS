@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
-from .models import Methodic, Reagent, Equipment, TechnicalMaintenance, Protocol, Contract, Bid, Invoice
+from .models import Methodic, Reagent, Equipment, TechnicalMaintenance, Protocol, Contract, Bid, Invoice, Record
 
 
 class ReagentInline(admin.TabularInline):
@@ -116,6 +116,10 @@ class ProtocolAdmin(admin.ModelAdmin):
     pass
 
 
+class RecordAdmin(admin.ModelAdmin):
+    pass
+
+
 
 admin.site.register(Methodic, MethodicAdmin)
 admin.site.register(Reagent, ReagentAdmin)
@@ -125,3 +129,4 @@ admin.site.register(Protocol, ProtocolAdmin)
 admin.site.register(Contract, ContractAdmin)
 admin.site.register(Bid, BidAdmin)
 admin.site.register(Invoice, InvoiceAdmin)
+admin.site.register(Record, RecordAdmin)

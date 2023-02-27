@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 
 from .forms import *
-from .models import Reagent, Methodic, Equipment, Contract, Protocol, TechnicalMaintenance, Bid, Invoice
+from .models import Reagent, Methodic, Equipment, Contract, Protocol, TechnicalMaintenance, Bid, Invoice, Record
 
 
 class ReagentsListView(LoginRequiredMixin, ListView):
@@ -189,12 +189,16 @@ class MaintenanceCreateView(LoginRequiredMixin, CreateView):
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'lab/dashboard.html'
     login_url = '/login/'
-    last_protocols_query = Protocol.objects.all()
+    last_protocols_query = Protocol.objects.order_by('close_date')
     recent_maintenance_query = TechnicalMaintenance.objects.order_by('next_date')
     extra_context = {"test": "Test test", "protocols": last_protocols_query, "next_maintenances": recent_maintenance_query}
 
 
-class NotebookView(LoginRequiredMixin, TemplateView):
+class NotebookView(LoginRequiredMixin, ListView):
     template_name = 'lab/notebook.html'
+    model = Record
+    context_object_name = 'records'
+    paginate_by = 30
+    ordering = ['-date_created']
     login_url = '/login/'
 
