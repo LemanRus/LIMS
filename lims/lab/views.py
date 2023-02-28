@@ -133,6 +133,7 @@ class BidDetailView(LoginRequiredMixin, DetailView):
 
 class BidCreateView(LoginRequiredMixin, CreateView):
     model = Bid
+    template_name = 'lab/bid_create.html'
     form_class = BidCreateForm
     login_url = '/login/'
 

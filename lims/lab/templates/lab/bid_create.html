@@ -5,9 +5,9 @@
 {% endblock title %}
 
 {% block content %}
-    <form action="{% url 'lab:methodic_create' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'lab:bid_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <p>{{form.errors}}</p>
+        <p>{{form.as_p}}</p>
         <p>Название: {{form.name}}</p>
         <p>Введена с: {{form.acts_from}}</p>
         <p>Действует до: {{form.acts_to}}</p>
