@@ -130,3 +130,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/static/
+/lims/core/migrations/
+/lims/lab/migrations/
