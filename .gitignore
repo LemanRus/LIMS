@@ -133,3 +133,4 @@ dmypy.json
 /static/
 /lims/core/migrations/
 /lims/lab/migrations/
+/lims/media/
