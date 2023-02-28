@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
+from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 
@@ -201,4 +202,25 @@ class NotebookView(LoginRequiredMixin, ListView):
     paginate_by = 30
     ordering = ['-date_created']
     login_url = '/login/'
+
+
+class RecordCreateView(LoginRequiredMixin, CreateView):
+    template_name = 'lab/record_create.html'
+    login_url = '/login'
+    form_class = RecordCreateForm
+    success_url = reverse_lazy('lab:notebook')
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        context = {}
+        if form.is_valid():
+            record = form.save(commit=False)
+            record.author = request.user
+            record.date_pub = timezone.now()
+            record.save()
+            context['form'] = self.form_class
+            return redirect(reverse('lab:notebook'))
+        else:
+            context['form'] = self.form_class
+            return render(request, self.template_name, context)
 

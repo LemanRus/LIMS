@@ -1,0 +1,15 @@
+{% extends 'lab/base.html' %}
+
+{% block title %}
+    Новая запись в журнал
+{% endblock title %}
+
+{% block content %}
+    <form action="{% url 'lab:record_create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{{form.errors}}</p>
+        <h2>Введите текст записи:</h2>
+        {{ form.as_p }}
+        <input type="submit" value="OK">
+    </form>
+{% endblock content %}

@@ -7,9 +7,10 @@
 {% block content %}
     <section>
         <h2>Лабораторный журнал</h2>
+        <a href="{% url 'lab:record_create' %}">Создать запись</a>
         <h3>Записи:</h3>
         {% for record in records %}
-            <h4>Запись автора {{record.author}} от {{record.date_created}}:</h4>
+            <h4>Запись автора {{record.author}} от {{record.date_created|date:"j b Y, H:i"}}:</h4>
             <p>{{record.text}}</p>
             {% if record.file_record_url %}
                 <p>

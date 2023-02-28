@@ -2,7 +2,7 @@ import datetime
 
 from django import forms
 
-from .models import Methodic, Reagent, Equipment, Protocol, TechnicalMaintenance, Bid, Invoice, Contract
+from .models import Methodic, Reagent, Equipment, Protocol, TechnicalMaintenance, Bid, Invoice, Contract, Record
 
 
 class MethodicCreateForm(forms.ModelForm):
@@ -77,3 +77,8 @@ class MaintenanceCreateForm(forms.ModelForm):
             'equipment': 'Относится к оборудованию'
         }
 
+
+class RecordCreateForm(forms.ModelForm):
+    class Meta:
+        model = Record
+        fields = ['text', 'file']
