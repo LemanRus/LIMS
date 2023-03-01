@@ -5,6 +5,7 @@
 {% endblock title %}
 
 {% block content %}
+    <h1>Протоколы</h1>
     {% for protocol in protocols %}
         <a href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{protocol.number}}</a>
 <!--        <p>{{methodic.acts_from}}</p>-->

@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Методики</h1>
+    <h1>Счета</h1>
     {% for methodic in methodics %}
         <a href="{% url 'lab:methodic_detail' methodic.id %}">{{methodic.name}}</a>
         <p>Действует до: {{methodic.acts_to}}</p>
