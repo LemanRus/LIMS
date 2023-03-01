@@ -57,6 +57,9 @@ class BidCreateForm(forms.ModelForm):
     class Meta:
         model = Bid
         fields = '__all__'
+        widgets = {
+            'invoices': forms.CheckboxSelectMultiple,
+        }
 
 
 class InvoiceCreateForm(forms.ModelForm):

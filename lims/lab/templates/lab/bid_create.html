@@ -7,12 +7,11 @@
 {% block content %}
     <form action="{% url 'lab:bid_create' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <p>{{form.as_p}}</p>
-        <p>Название: {{form.name}}</p>
-        <p>Введена с: {{form.acts_from}}</p>
-        <p>Действует до: {{form.acts_to}}</p>
-        <p>Используемые реагенты: {{form.used_reagents}} Не нашли в списке? <a href="#">Добавить</a></p>
-        <p>Используемое оборудование: {{form.used_equipment}} Не нашли в списке? <a href="#">Добавить</a></p>
+        {{ form.errors }}
+        <p>Договор: {{form.contract}}</p>
+        <p>Номер: {{form.number}}</p>
+        <p>Статус: {{form.status}}</p>
+        <p>Счета: {{form.invoices}} Не нашли в списке? <a href="#">Добавить</a></p>
         <input type="submit" value="OK">
     </form>
 {% endblock content %}

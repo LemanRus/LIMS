@@ -86,6 +86,7 @@ class Protocol(models.Model):
     contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='protocols')
     number = models.CharField(max_length=200)
     act_number = models.CharField(max_length=200)
+    used_methodics = models.ManyToManyField(Methodic, related_name='protocols')
     file_protocol = models.FileField(blank=True, null=True)
     file_act = models.FileField(blank=True, null=True)
     close_date = models.DateTimeField()
