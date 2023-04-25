@@ -10,4 +10,5 @@
         <a href="{% url 'lab:reagent_detail' reagent.id %}">{{reagent.name}}</a>
         <p>Годен до: {{reagent.best_before}}</p>
     {% endfor %}
+        <a href="{% url 'lab:reagent_create' %}">Добавить реактив</a>
 {% endblock content %}
