@@ -39,6 +39,20 @@ class ReagentCreateForm(forms.ModelForm):
     class Meta:
         model = Reagent
         fields = '__all__'
+        widgets = {
+            'made_date': forms.SelectDateWidget(
+                years=range(datetime.date.today().year - 50, datetime.date.today().year + 50)
+            ),
+            'best_before': forms.SelectDateWidget(
+                years=range(datetime.date.today().year - 30, datetime.date.today().year + 50)
+            ),
+        }
+        labels = {
+            'name': 'Наименование',
+            'made_by': 'Производитель',
+            'made_date': 'Дата производства',
+            'best_before': 'Годен до',
+        }
 
 
 class EquipmentCreateForm(forms.ModelForm):

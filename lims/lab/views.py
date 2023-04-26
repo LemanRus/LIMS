@@ -54,9 +54,9 @@ class ReagentDetailView(LoginRequiredMixin, DetailView):
 
 
 class ReagentCreateView(LoginRequiredMixin, CreateView):
-    model = Reagent
     form_class = ReagentCreateForm
     template_name = 'lab/reagent_create.html'
+    success_url = reverse_lazy('lab:reagents')
     login_url = '/login/'
 
 
