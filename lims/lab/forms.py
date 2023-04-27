@@ -59,6 +59,20 @@ class EquipmentCreateForm(forms.ModelForm):
     class Meta:
         model = Equipment
         fields = '__all__'
+        widgets = {
+            'last_cal': forms.SelectDateWidget(
+                years=range(datetime.date.today().year - 15, datetime.date.today().year + 1)
+            ),
+            'next_cal': forms.SelectDateWidget(
+                years=range(datetime.date.today().year, datetime.date.today().year + 15)
+            ),
+        }
+        labels = {
+            'name': 'Наименование',
+            'last_cal': 'Дата последней калибровки (поверки)',
+            'next_cal': 'Дата следующей калибровки (поверки)',
+            'cal_organisation': 'Организация, проводящая поверку (калибровку)',
+        }
 
 
 class ContractCreateForm(forms.ModelForm):
