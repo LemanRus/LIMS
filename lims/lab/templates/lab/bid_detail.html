@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "lab/base.html" %}
 
-</body>
-</html>
+{% block title %}
+    Заявка {{ bid.number }}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{ bid.number }}</h2>
+    <p>Статус: {{ bid.get_status_display }}</p>
+    <p>Счета:</p>
+    {% for invoice in bid.invoices.all %}
+        <p><a href="{% url 'lab:invoice_detail' invoice.pk %}">{{ invoice.number }}</a></p>
+    {% endfor %}
+    <p>К договору: <a href="{% url 'lab:contract_detail' bid.contract.pk %}">{{ bid.contract.number }}</a></p>
+{% endblock content %}

@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('bids/', views.BidsListView.as_view(), name='bids'),
     path('bids/create/', views.BidCreateView.as_view(), name='bid_create'),
-    path('bids/<int:protocol_id>/', views.BidDetailView.as_view(), name='bid_detail'),
+    path('bids/<int:bid_id>/', views.BidDetailView.as_view(), name='bid_detail'),
 
     path('invoices/', views.InvoicesListView.as_view(), name='invoices'),
     path('invoices/create/', views.InvoiceCreateView.as_view(), name='invoice_create'),
