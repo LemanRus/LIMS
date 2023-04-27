@@ -99,7 +99,9 @@ class ProtocolDetailView(LoginRequiredMixin, DetailView):
 
 
 class ProtocolCreateView(LoginRequiredMixin, CreateView):
-    model = Protocol
+    form_class = ProtocolCreateForm
+    template_name = 'lab/protocol_create.html'
+    success_url = reverse_lazy('lab:protocols')
     login_url = '/login/'
 
 

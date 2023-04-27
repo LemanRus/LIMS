@@ -33,6 +33,21 @@ class ProtocolCreateForm(forms.ModelForm):
     class Meta:
         model = Protocol
         fields = '__all__'
+        widgets = {
+            'close_date': forms.SelectDateWidget(
+                years=range(datetime.date.today().year - 5, datetime.date.today().year + 1)
+            )
+        }
+        labels = {
+            'author': 'Автор',
+            'contract': 'К договру',
+            'number': 'Номер',
+            'act_number': 'Номер акта',
+            'used_methodics': 'Использованные методики',
+            'file_protocol': 'Файл протокола (скан)',
+            'file_act': 'Файл акта (скан)',
+            'close_date': 'Дата закрытия',
+        }
 
 
 class ReagentCreateForm(forms.ModelForm):
@@ -41,7 +56,7 @@ class ReagentCreateForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'made_date': forms.SelectDateWidget(
-                years=range(datetime.date.today().year - 50, datetime.date.today().year)
+                years=range(datetime.date.today().year - 50, datetime.date.today().year + 1)
             ),
             'best_before': forms.SelectDateWidget(
                 years=range(datetime.date.today().year - 30, datetime.date.today().year + 50)
