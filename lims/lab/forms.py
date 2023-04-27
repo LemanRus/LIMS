@@ -79,6 +79,21 @@ class ContractCreateForm(forms.ModelForm):
     class Meta:
         model = Contract
         fields = '__all__'
+        widgets = {
+            'date_conclusion': forms.SelectDateWidget(
+                years=range(datetime.date.today().year - 15, datetime.date.today().year + 16)
+            ),
+            'date_end': forms.SelectDateWidget(
+                years=range(datetime.date.today().year - 15, datetime.date.today().year + 16)
+            ),
+        }
+        labels = {
+            'number': 'Номер',
+            'contragent': 'Контрагент',
+            'date_conclusion': 'Дата заключения',
+            'date_end': 'Дата закрытия',
+            'file_contract': 'Файл договора (скан)'
+        }
 
 
 class BidCreateForm(forms.ModelForm):

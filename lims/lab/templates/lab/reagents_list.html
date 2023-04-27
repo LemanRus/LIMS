@@ -7,8 +7,8 @@
 {% block content %}
     <h1>Реактивы</h1>
     {% for reagent in reagents %}
-        <a href="{% url 'lab:reagent_detail' reagent.id %}">{{reagent.name}}</a>
-        <p>Годен до: {{reagent.best_before}}</p>
+        <a href="{% url 'lab:reagent_detail' reagent.id %}">{{ reagent.name }}</a>
+        <p>Годен до: {{ reagent.best_before }}</p>
     {% endfor %}
-        <a href="{% url 'lab:reagent_create' %}">Добавить реактив</a>
+    <a href="{% url 'lab:reagent_create' %}">Добавить реактив</a>
 {% endblock content %}

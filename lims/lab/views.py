@@ -84,8 +84,9 @@ class ContractDetailView(LoginRequiredMixin, DetailView):
 
 
 class ContractCreateView(LoginRequiredMixin, CreateView):
-    model = Contract
     form_class = ContractCreateForm
+    template_name = 'lab/contract_create.html'
+    success_url = reverse_lazy('lab:contracts')
     login_url = '/login/'
 
 

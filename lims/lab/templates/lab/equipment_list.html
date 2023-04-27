@@ -8,8 +8,8 @@
     <h1>Оборудование</h1>
     {% for item in equipment %}
         <p>
-            <a href="{% url 'lab:equipment_detail' item.id %}">{{item.name}}</a>
+            <a href="{% url 'lab:equipment_detail' item.id %}">{{ item.name }}</a>
         </p>
     {% endfor %}
-            <a href="{% url 'lab:equipment_create' %}">Добавить оборудование</a>
+    <a href="{% url 'lab:equipment_create' %}">Добавить оборудование</a>
 {% endblock content %}

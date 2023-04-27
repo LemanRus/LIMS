@@ -10,5 +10,5 @@
         <a href="{% url 'lab:methodic_detail' methodic.id %}">{{methodic.name}}</a>
         <p>Действует до: {{methodic.acts_to}}</p>
     {% endfor %}
-        <a href="{% url 'lab:methodic_create' %}">Добавить методику</a>
+    <a href="{% url 'lab:methodic_create' %}">Добавить методику</a>
 {% endblock content %}

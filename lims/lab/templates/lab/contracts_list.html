@@ -8,7 +8,8 @@
     <h1>Договоры</h1>
     {% for contract in contracts %}
         <p>
-            <a href="{% url 'lab:contract_detail' contract.id %}">Договор {{contract.number}}</a>
+            <a href="{% url 'lab:contract_detail' contract.id %}">Договор {{ contract.number }}</a>
         </p>
     {% endfor %}
+    <a href="{% url 'lab:contract_create' %}">Добавить договор</a>
 {% endblock content %}
