@@ -41,7 +41,7 @@ class ReagentCreateForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'made_date': forms.SelectDateWidget(
-                years=range(datetime.date.today().year - 50, datetime.date.today().year + 50)
+                years=range(datetime.date.today().year - 50, datetime.date.today().year)
             ),
             'best_before': forms.SelectDateWidget(
                 years=range(datetime.date.today().year - 30, datetime.date.today().year + 50)
