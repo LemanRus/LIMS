@@ -134,9 +134,9 @@ class BidDetailView(LoginRequiredMixin, DetailView):
 
 
 class BidCreateView(LoginRequiredMixin, CreateView):
-    model = Bid
-    template_name = 'lab/bid_create.html'
     form_class = BidCreateForm
+    template_name = 'lab/bid_create.html'
+    success_url = reverse_lazy('lab:bids')
     login_url = '/login/'
 
 
@@ -149,8 +149,9 @@ class InvoiceDetailView(LoginRequiredMixin, DetailView):
 
 
 class InvoiceCreateView(LoginRequiredMixin, CreateView):
-    model = Invoice
     form_class = InvoiceCreateForm
+    template_name = 'lab/invoice_create.html'
+    success_url = reverse_lazy('lab:invoices')
     login_url = '/login/'
 
 
