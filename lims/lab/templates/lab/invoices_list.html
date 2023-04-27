@@ -1,14 +1,14 @@
 {% extends "lab/base.html" %}
 
 {% block title %}
-    Методики
+    Счета
 {% endblock title %}
 
 {% block content %}
     <h1>Счета</h1>
-    {% for methodic in methodics %}
-        <a href="{% url 'lab:methodic_detail' methodic.id %}">{{methodic.name}}</a>
-        <p>Действует до: {{methodic.acts_to}}</p>
+    {% for invoice in invoices %}
+        <p>Счёт <a href="{% url 'lab:invoice_detail' invoice.id %}">{{invoice.number}}</a></p>
+        <p>Статус: {{ invoice.get_status_display }}</p>
     {% endfor %}
-        <a href="{% url 'lab:methodic_create' %}">Добавить методику</a>
+        <a href="{% url 'lab:invoice_create' %}">Добавить счёт</a>
 {% endblock content %}
