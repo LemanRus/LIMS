@@ -78,7 +78,7 @@ class MethodicCreateView(LoginRequiredMixin, CreateView):
 class MethodicUpdateView(LoginRequiredMixin, UpdateView):
     form_class = MethodicCreateForm
     model = Methodic
-    template_name = 'lab/methodic_create.html'
+    template_name = 'lab/methodic_update.html'
     pk_url_kwarg = 'methodic_id'
     success_url = reverse_lazy('lab:methodics')
     login_url = '/login/'
