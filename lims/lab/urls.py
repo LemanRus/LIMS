@@ -10,6 +10,7 @@ urlpatterns = [
     path('reagents/', views.ReagentsListView.as_view(), name='reagents'),
     path('reagents/create/', views.ReagentCreateView.as_view(), name='reagent_create'),
     path('reagents/<int:reagent_id>/', views.ReagentDetailView.as_view(), name='reagent_detail'),
+    path('reagents/update_reagent-<int:reagent_id>/', views.ReagentUpdateView.as_view(), name='reagent_update'),
 
     path('methodics/', views.MethodicsListView.as_view(), name='methodics'),
     path('methodics/create/', views.MethodicCreateView.as_view(), name='methodic_create'),

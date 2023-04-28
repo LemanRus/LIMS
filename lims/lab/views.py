@@ -60,6 +60,15 @@ class ReagentCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
 
 
+class ReagentUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = ReagentCreateForm
+    model = Reagent
+    template_name = 'lab/reagent_update.html'
+    pk_url_kwarg = 'reagent_id'
+    success_url = reverse_lazy('lab:reagents')
+    login_url = '/login/'
+
+
 class MethodicDetailView(LoginRequiredMixin, DetailView):
     model = Methodic
     template_name = 'lab/methodic_detail.html'

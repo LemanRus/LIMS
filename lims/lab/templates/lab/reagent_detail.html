@@ -12,4 +12,5 @@
     {% for methodic in reagent.methodics.all %}
         <p>{{methodic.name}}</p>
     {% endfor %}
+    <a href="{% url 'lab:reagent_update' reagent.id %}">Редактировать</a>
 {% endblock content %}
