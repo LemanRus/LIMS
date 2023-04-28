@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView, CreateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 
 from .forms import *
 from .models import Reagent, Methodic, Equipment, Contract, Protocol, TechnicalMaintenance, Bid, Invoice, Record
@@ -71,6 +71,15 @@ class MethodicDetailView(LoginRequiredMixin, DetailView):
 class MethodicCreateView(LoginRequiredMixin, CreateView):
     form_class = MethodicCreateForm
     template_name = 'lab/methodic_create.html'
+    success_url = reverse_lazy('lab:methodics')
+    login_url = '/login/'
+
+
+class MethodicUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = MethodicCreateForm
+    model = Methodic
+    template_name = 'lab/methodic_create.html'
+    pk_url_kwarg = 'methodic_id'
     success_url = reverse_lazy('lab:methodics')
     login_url = '/login/'
 

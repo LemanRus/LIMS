@@ -14,6 +14,7 @@ urlpatterns = [
     path('methodics/', views.MethodicsListView.as_view(), name='methodics'),
     path('methodics/create/', views.MethodicCreateView.as_view(), name='methodic_create'),
     path('methodics/<int:methodic_id>/', views.MethodicDetailView.as_view(), name='methodic_detail'),
+    path('methodics/update_methodic-<int:methodic_id>/', views.MethodicUpdateView.as_view(), name='methodic_update'),
 
     path('equipment/', views.EquipmentListView.as_view(), name='equipment'),
     path('equipment/create/', views.EquipmentCreateView.as_view(), name='equipment_create'),
