@@ -1,0 +1,13 @@
+{% extends 'lab/base.html' %}
+
+{% block title %}
+    Редактировать счёт
+{% endblock title %}
+
+{% block content %}
+    <form action="{% url 'lab:invoice_update' invoice.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="OK">
+    </form>
+{% endblock content %}

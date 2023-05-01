@@ -219,6 +219,17 @@ class InvoicesListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
 
 
+class InvoiceUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = InvoiceCreateForm
+    model = Invoice
+    template_name = 'lab/invoice_update.html'
+    pk_url_kwarg = 'invoice_id'
+    login_url = '/login/'
+
+    def get_success_url(self):
+        return reverse_lazy('lab:invoice_detail', kwargs={'invoice_id': self.object.pk})
+
+
 class MaintenanceCreateView(LoginRequiredMixin, CreateView):
     form_class = MaintenanceCreateForm
     template_name = 'lab/maintenance_create.html'

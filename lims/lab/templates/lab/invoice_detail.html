@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "lab/base.html" %}
 
-</body>
-</html>
+{% block title %}
+    Cчёт {{ invoice.number }}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{ invoice.number }}</h2>
+    <p>{{ invoice.get_status_display}}</p>
+    <a href="{% url 'lab:invoice_update' invoice.id %}">Редактировать</a>
+{% endblock content %}
