@@ -9,10 +9,9 @@
     <p>{{contract.contragent}}</p>
     <p>{{contract.date_conclusion}}</p>
     <p>{{contract.date_end}}</p>
-    <p>
-        <a href="{{ contract.file_contract_url }}">Файл договора</a>
-    </p>
+    <p><a href="{{ contract.file_contract_url }}">Файл договора</a></p>
     {% for protocol in contract.protocols.all %}
-        <a href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{protocol.number}}</a>
+        <p><a href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{ protocol.number }}</a></p>
     {% endfor %}
+    <p><a href="{% url 'lab:contract_update' contract.id %}">Редактировать</a></p>
 {% endblock content %}

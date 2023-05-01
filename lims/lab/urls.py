@@ -20,11 +20,14 @@ urlpatterns = [
     path('equipment/', views.EquipmentListView.as_view(), name='equipment'),
     path('equipment/create/', views.EquipmentCreateView.as_view(), name='equipment_create'),
     path('equipment/<int:equipment_id>/', views.EquipmentDetailView.as_view(), name='equipment_detail'),
-    path('equipment/update_equipment-<int:equipment_id>/', views.EquipmentUpdateView.as_view(), name='equipment_update'),
+    path('equipment/update_equipment-<int:equipment_id>/', views.EquipmentUpdateView.as_view(),
+         name='equipment_update'),
 
     path('contracts/', views.ContractsListView.as_view(), name='contracts'),
     path('contracts/create/', views.ContractCreateView.as_view(), name='contract_create'),
     path('contracts/<int:contract_id>/', views.ContractDetailView.as_view(), name='contract_detail'),
+    path('contracts/update_contract-<int:contract_id>/', views.ContractUpdateView.as_view(),
+         name='contract_update'),
 
     path('protocols/', views.ProtocolsListView.as_view(), name='protocols'),
     path('protocols/create/', views.ProtocolCreateView.as_view(), name='protocol_create'),

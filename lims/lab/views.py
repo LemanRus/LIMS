@@ -112,6 +112,17 @@ class ContractCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
 
 
+class ContractUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = ContractCreateForm
+    model = Contract
+    template_name = 'lab/contract_update.html'
+    pk_url_kwarg = 'contract_id'
+    login_url = '/login/'
+
+    def get_success_url(self):
+        return reverse_lazy('lab:contract_detail', kwargs={'contract_id': self.object.pk})
+
+
 class ProtocolDetailView(LoginRequiredMixin, DetailView):
     model = Protocol
     template_name = 'lab/protocol_detail.html'
