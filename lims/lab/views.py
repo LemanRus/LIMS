@@ -65,8 +65,10 @@ class ReagentUpdateView(LoginRequiredMixin, UpdateView):
     model = Reagent
     template_name = 'lab/reagent_update.html'
     pk_url_kwarg = 'reagent_id'
-    success_url = reverse_lazy('lab:reagents')
     login_url = '/login/'
+
+    def get_success_url(self):
+        return reverse_lazy('lab:reagent_detail', kwargs={'reagent_id': self.object.pk})
 
 
 class MethodicDetailView(LoginRequiredMixin, DetailView):
@@ -89,8 +91,10 @@ class MethodicUpdateView(LoginRequiredMixin, UpdateView):
     model = Methodic
     template_name = 'lab/methodic_update.html'
     pk_url_kwarg = 'methodic_id'
-    success_url = reverse_lazy('lab:methodics')
     login_url = '/login/'
+
+    def get_success_url(self):
+        return reverse_lazy('lab:methodic_detail', kwargs={'methodic_id': self.object.pk})
 
 
 class ContractDetailView(LoginRequiredMixin, DetailView):
