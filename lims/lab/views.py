@@ -142,6 +142,17 @@ class EquipmentCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
 
 
+class EquipmentUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = EquipmentCreateForm
+    model = Equipment
+    template_name = 'lab/equipment_update.html'
+    pk_url_kwarg = 'equipment_id'
+    login_url = '/login/'
+
+    def get_success_url(self):
+        return reverse_lazy('lab:equipment_detail', kwargs={'equipment_id': self.object.pk})
+
+
 class BidsListView(LoginRequiredMixin, ListView):
     model = Bid
     template_name = "lab/bids_list.html"

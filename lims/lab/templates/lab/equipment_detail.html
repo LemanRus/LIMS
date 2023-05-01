@@ -13,5 +13,6 @@
         <p>{{maintenance.name}}</p>
         <p>{{maintenance.type}}</p>
     {% endfor %}
-    <a href="{% url 'lab:maintenance_create' %}?equipment={{ equipment.id }}">Добавить техобслуживание</a>
+    <p><a href="{% url 'lab:maintenance_create' %}?equipment={{ equipment.id }}">Добавить техобслуживание</a></p>
+    <p><a href="{% url 'lab:equipment_update' equipment.id %}">Редактировать</a></p>
 {% endblock content %}
