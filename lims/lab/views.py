@@ -186,6 +186,17 @@ class BidCreateView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
 
 
+class BidUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = BidCreateForm
+    model = Bid
+    template_name = 'lab/bid_update.html'
+    pk_url_kwarg = 'bid_id'
+    login_url = '/login/'
+
+    def get_success_url(self):
+        return reverse_lazy('lab:bid_detail', kwargs={'bid_id': self.object.pk})
+
+
 class InvoiceDetailView(LoginRequiredMixin, DetailView):
     model = Invoice
     template_name = 'lab/invoice_detail.html'

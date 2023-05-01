@@ -12,4 +12,5 @@
         <p><a href="{% url 'lab:invoice_detail' invoice.pk %}">{{ invoice.number }}</a></p>
     {% endfor %}
     <p>К договору: <a href="{% url 'lab:contract_detail' bid.contract.pk %}">{{ bid.contract.number }}</a></p>
+    <p><a href="{% url 'lab:bid_update' bid.id %}">Редактировать</a></p>
 {% endblock content %}
