@@ -11,5 +11,6 @@
             <a href="{% url 'lab:equipment_detail' item.id %}">{{ item.name }}</a>
         </p>
     {% endfor %}
-    <a href="{% url 'lab:equipment_create' %}">Добавить оборудование</a>
+    <p><a href="{% url 'lab:equipment_create' %}">Добавить оборудование</a></p>
+    <p><a href="{% url 'lab:maintenance_create' %}">Добавить техобслуживание</a></p>
 {% endblock content %}

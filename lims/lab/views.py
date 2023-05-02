@@ -21,6 +21,7 @@ class MethodicsListView(LoginRequiredMixin, ListView):
     model = Methodic
     template_name = "lab/methodics_list.html"
     context_object_name = "methodics"
+    paginate_by = 15
     login_url = '/login/'
 
 
@@ -28,6 +29,7 @@ class EquipmentListView(LoginRequiredMixin, ListView):
     model = Equipment
     template_name = "lab/equipment_list.html"
     context_object_name = "equipment"
+    paginate_by = 15
     login_url = '/login/'
 
 
@@ -35,6 +37,7 @@ class ContractsListView(LoginRequiredMixin, ListView):
     model = Contract
     template_name = "lab/contracts_list.html"
     context_object_name = "contracts"
+    paginate_by = 15
     login_url = '/login/'
 
 
@@ -42,6 +45,7 @@ class ProtocolsListView(LoginRequiredMixin, ListView):
     model = Protocol
     template_name = "lab/protocols_list.html"
     context_object_name = "protocols"
+    paginate_by = 15
     login_url = '/login/'
 
 
@@ -168,6 +172,7 @@ class BidsListView(LoginRequiredMixin, ListView):
     model = Bid
     template_name = "lab/bids_list.html"
     context_object_name = "bids"
+    paginate_by = 15
     login_url = '/login/'
 
 
@@ -216,6 +221,7 @@ class InvoicesListView(LoginRequiredMixin, ListView):
     model = Invoice
     template_name = "lab/invoices_list.html"
     context_object_name = "invoices"
+    paginate_by = 15
     login_url = '/login/'
 
 
@@ -233,8 +239,10 @@ class InvoiceUpdateView(LoginRequiredMixin, UpdateView):
 class MaintenanceCreateView(LoginRequiredMixin, CreateView):
     form_class = MaintenanceCreateForm
     template_name = 'lab/maintenance_create.html'
-    success_url = reverse_lazy('lab:equipment')
     login_url = '/login/'
+
+    def get_success_url(self):
+        return reverse_lazy('lab:equipment_detail', kwargs={'equipment_id': self.request.POST.get('equipment')})
 
     def get(self, request, *args, **kwargs):
         context = {'form': self.form_class(initial=request.GET)}

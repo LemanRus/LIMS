@@ -130,13 +130,21 @@ class InvoiceCreateForm(forms.ModelForm):
         }
 
 
+class ReadOnlyText(forms.TextInput):
+    input_type = 'text'
+
+    def render(self, name, value, attrs=None):
+        if value is None:
+            value = ''
+        return value
+
+
 class MaintenanceCreateForm(forms.ModelForm):
     class Meta:
         model = TechnicalMaintenance
         fields = '__all__'
         widgets = {
-            'next_date': forms.SelectDateWidget(
-            ),
+            'next_date': forms.SelectDateWidget(),
         }
         labels = {
             'equipment': 'Относится к оборудованию'
