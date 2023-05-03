@@ -270,9 +270,14 @@ class MaintenanceCreateView(LoginRequiredMixin, CreateView):
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'lab/dashboard.html'
     login_url = '/login/'
-    last_protocols_query = Protocol.objects.order_by('close_date')
-    recent_maintenance_query = TechnicalMaintenance.objects.order_by('next_date')
-    extra_context = {"test": "Test test", "protocols": last_protocols_query, "next_maintenances": recent_maintenance_query}
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['next_maintenances'] = TechnicalMaintenance.objects.order_by('next_date')[:6]
+        context['nearest_reagents'] = Reagent.objects.order_by('best_before')[:6]
+        context['invoices_in_progress'] = Invoice.objects.filter(status='w')[:6]
+        context['protocols'] = Protocol.objects.order_by('close_date')[:6]
+        return context
 
 
 class NotebookView(LoginRequiredMixin, ListView):

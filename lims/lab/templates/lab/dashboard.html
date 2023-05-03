@@ -5,16 +5,46 @@
 {% endblock title %}
 
 {% block content %}
-    <section>
-        <h2>Панель управления</h2>
-        <h3>Последние протоколы:</h3>
-        {% for protocol in protocols %}
-            <a href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{protocol.number}}</a>
-        {% endfor %}
-        <h3>Предстоящие технические обслуживания:</h3>
-        {% for maintenance in next_maintenances %}
-            <h4>{{maintenance.name}}, {{maintenance.next_date}}</h4>
-            <a href="{% url 'lab:equipment_detail' maintenance.equipment.id %}">{{ maintenance.equipment.name }}</a>
-        {% endfor %}
+    <section class="container">
+        <h1 class="text-center text-success py-4">Панель управления</h1>
+        <div class="row align-items-start my-3">
+            <div class="col">
+                <h3 class="text-primary py-2">Последние протоколы:</h3>
+                {% for protocol in protocols %}
+                    <h5 class="mt-2 mb-1"><a
+                            href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{ protocol.number }}</a></h5>
+                {% endfor %}
+            </div>
+            <div class="col">
+                <h3 class="text-primary py-2">Предстоящие технические обслуживания:</h3>
+                {% for maintenance in next_maintenances %}
+                    <h5 class="mt-2 mb-1">{{ maintenance.name }}</h5>
+                    <p class="mb-0"><a
+                            href="{% url 'lab:equipment_detail' maintenance.equipment.id %}">{{ maintenance.equipment.name }}</a>
+                    </p>
+                    <p class="mb-0">{{ maintenance.next_date }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row align-items-start my-3">
+            <div class="col">
+                <h3 class="text-primary py-2">Реактивы с ближайшим к истечению сроком годности:</h3>
+                {% for reagent in nearest_reagents %}
+                    <h5 class="mb-1 mt-2"><a href="{% url 'lab:reagent_detail' reagent.pk %}">{{ reagent.name }}</a>
+                    </h5>
+                    <p class="mb-0">{{ reagent.best_before }}</p>
+                {% endfor %}
+            </div>
+            <div class="col">
+                <h3 class="text-primary py-2">Заявки на выполнении:</h3>
+                {% for protocol in protocols %}
+                    <h5 class="mt-2 mb-1"><a
+                            href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{ protocol.number }}</a></h5>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row align-items-start my-3">
+
+        </div>
     </section>
 {% endblock content %}
