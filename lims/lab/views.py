@@ -5,6 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
+from django.apps import apps
 
 from .forms import *
 from .models import Reagent, Methodic, Equipment, Contract, Protocol, TechnicalMaintenance, Bid, Invoice, Record
@@ -308,4 +309,28 @@ class RecordCreateView(LoginRequiredMixin, CreateView):
         else:
             context['form'] = self.form_class
             return render(request, self.template_name, context)
+
+
+class AuditTrailView(LoginRequiredMixin, TemplateView):
+    template_name = 'lab/audit_trail.html'
+    login_url = '/login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        changed_records = {}
+        for model in apps.get_models():
+            for item in model.objects.all():
+                fields = {}
+                if hasattr(item, 'history'):
+                    for history_record in item.history.all():
+                        field_names = {}
+                        for field in item._meta.get_fields():
+                            if hasattr(field, 'verbose_name'):
+                                temp = {k: v for k, v in [(field.verbose_name, history_record.__dict__.get(field.name))]}
+                                field_names.update(temp)
+                        fields[history_record] = field_names
+                        print(history_record.history_user)
+                    changed_records[item.name] = fields
+        context['constructed_history'] = changed_records
+        return context
 

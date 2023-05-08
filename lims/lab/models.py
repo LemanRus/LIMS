@@ -1,6 +1,7 @@
 from django.db import models
 
 from core.models import CustomUser
+from simple_history.models import HistoricalRecords
 
 
 class Methodic(models.Model):
@@ -23,6 +24,8 @@ class Reagent(models.Model):
     made_by = models.CharField(max_length=200)
     made_date = models.DateField(blank=True, null=True)
     best_before = models.DateField(blank=True, null=True)
+
+    history = HistoricalRecords()
 
     def __str__(self):
         return self.name
@@ -152,3 +155,4 @@ class Record(models.Model):
     def file_record_url(self):
         if self.file and hasattr(self.file, 'url'):
             return self.file.url
+

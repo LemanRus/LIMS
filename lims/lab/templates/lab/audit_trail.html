@@ -1,0 +1,21 @@
+{% extends "lab/base.html" %}
+
+{% block title %}
+    Аудиторский след
+{% endblock title %}
+
+{% block content %}
+    <section class="container">
+        <h1 class="text-center py-4">Аудиторский след</h1>
+        {% for instance, history in constructed_history.items %}
+            {% for history_record, fields in history.items %}
+                <h5>{{ instance }} был изменён {{ history_record.history_date }}
+                    пользователем {{ history_record.history_user }}</h5>
+                <p>Записанные значения:</p>
+                {% for field_name, value in fields.items%}
+                    <p>{{ field_name }}: {{ value }}</p>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </section>
+{% endblock content %}

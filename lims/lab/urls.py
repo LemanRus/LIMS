@@ -50,4 +50,5 @@ urlpatterns = [
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
     path('notebook/', views.NotebookView.as_view(), name='notebook'),
     path('notebook/create/', views.RecordCreateView.as_view(), name='record_create'),
+    path('audit_trail/', views.AuditTrailView.as_view(), name='audit_trail'),
 ]

@@ -26,7 +26,10 @@
                 <a href="{% url 'lab:protocols' %}" class="nav-link">Протоколы</a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'lab:notebook' %}" class="nav-link link-secondary">Лабораторный журнал</a>
+                <a href="{% url 'lab:notebook' %}" class="nav-link link-secondary">Журнал</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'lab:audit_trail' %}" class="nav-link link-dark">Аудиторский след</a>
             </li>
             <li class="nav-item">
                 <a href="{% url 'core:profile' user.id %}" class="nav-link link-warning">Профиль</a>
