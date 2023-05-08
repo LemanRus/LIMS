@@ -23,7 +23,7 @@ class Reagent(models.Model):
     name = models.CharField(max_length=200)
     made_by = models.CharField(max_length=200)
     made_date = models.DateField(blank=True, null=True)
-    best_before = models.DateField(blank=True, null=True)
+    best_before = models.DateField(blank=True, null=True, verbose_name='Годен до')
 
     history = HistoricalRecords()
 

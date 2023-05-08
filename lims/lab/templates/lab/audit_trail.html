@@ -11,7 +11,7 @@
             {% for history_record, fields in history.items %}
                 <h5>{{ instance }} был изменён {{ history_record.history_date }}
                     пользователем {{ history_record.history_user }}</h5>
-                <p>Записанные значения:</p>
+                <h6>Записанные значения:</h6>
                 {% for field_name, value in fields.items%}
                     <p>{{ field_name }}: {{ value }}</p>
                 {% endfor %}
