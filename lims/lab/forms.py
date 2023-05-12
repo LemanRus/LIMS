@@ -38,16 +38,6 @@ class ProtocolCreateForm(forms.ModelForm):
                 years=range(datetime.date.today().year - 5, datetime.date.today().year + 1)
             )
         }
-        labels = {
-            'author': 'Автор',
-            'contract': 'К договру',
-            'number': 'Номер',
-            'act_number': 'Номер акта',
-            'used_methodics': 'Использованные методики',
-            'file_protocol': 'Файл протокола (скан)',
-            'file_act': 'Файл акта (скан)',
-            'close_date': 'Дата закрытия',
-        }
 
 
 class ReagentCreateForm(forms.ModelForm):
@@ -61,12 +51,6 @@ class ReagentCreateForm(forms.ModelForm):
             'best_before': forms.SelectDateWidget(
                 years=range(datetime.date.today().year - 30, datetime.date.today().year + 50)
             ),
-        }
-        labels = {
-            'name': 'Наименование',
-            'made_by': 'Производитель',
-            'made_date': 'Дата производства',
-            'best_before': 'Годен до',
         }
 
 
@@ -82,12 +66,6 @@ class EquipmentCreateForm(forms.ModelForm):
                 years=range(datetime.date.today().year, datetime.date.today().year + 15)
             ),
         }
-        labels = {
-            'name': 'Наименование',
-            'last_cal': 'Дата последней калибровки (поверки)',
-            'next_cal': 'Дата следующей калибровки (поверки)',
-            'cal_organisation': 'Организация, проводящая поверку (калибровку)',
-        }
 
 
 class ContractCreateForm(forms.ModelForm):
@@ -101,13 +79,6 @@ class ContractCreateForm(forms.ModelForm):
             'date_end': forms.SelectDateWidget(
                 years=range(datetime.date.today().year - 15, datetime.date.today().year + 16)
             ),
-        }
-        labels = {
-            'number': 'Номер',
-            'contragent': 'Контрагент',
-            'date_conclusion': 'Дата заключения',
-            'date_end': 'Дата закрытия',
-            'file_contract': 'Файл договора (скан)'
         }
 
 
@@ -124,19 +95,6 @@ class InvoiceCreateForm(forms.ModelForm):
     class Meta:
         model = Invoice
         fields = '__all__'
-        labels = {
-            'number': 'Номер',
-            'status': 'Статус',
-        }
-
-
-class ReadOnlyText(forms.TextInput):
-    input_type = 'text'
-
-    def render(self, name, value, attrs=None):
-        if value is None:
-            value = ''
-        return value
 
 
 class MaintenanceCreateForm(forms.ModelForm):
@@ -145,9 +103,6 @@ class MaintenanceCreateForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'next_date': forms.SelectDateWidget(),
-        }
-        labels = {
-            'equipment': 'Относится к оборудованию'
         }
 
 
