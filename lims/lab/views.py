@@ -329,8 +329,8 @@ class AuditTrailView(LoginRequiredMixin, TemplateView):
                                 temp = {k: v for k, v in [(field.verbose_name, history_record.__dict__.get(field.name))]}
                                 field_names.update(temp)
                         fields[history_record] = field_names
-                        print(history_record.history_user)
-                    changed_records[item.name] = fields
+                    if fields:
+                        changed_records[item.name] = fields
         context['constructed_history'] = changed_records
         return context
 

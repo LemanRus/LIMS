@@ -1,5 +1,7 @@
 {% extends "lab/base.html" %}
 
+{% load sort_dict %}
+
 {% block title %}
     Аудиторский след
 {% endblock title %}
@@ -7,7 +9,7 @@
 {% block content %}
     <section class="container">
         <h1 class="text-center py-4">Аудиторский след</h1>
-        {% for instance, history in constructed_history.items %}
+        {% for instance, history in constructed_history|sort_dict%}
             {% for history_record, fields in history.items %}
                 <h5>{{ instance }} был изменён {{ history_record.history_date }}
                     пользователем {{ history_record.history_user }}</h5>
