@@ -13,6 +13,8 @@ class Methodic(models.Model):
     used_equipment = models.ManyToManyField('Equipment', blank=True, related_name='methodics',
                                             verbose_name='Используемое оборудование')
 
+    history = HistoricalRecords()
+
     def __str__(self):
         return f'Методика "{self.name}"'
 
@@ -43,6 +45,8 @@ class Equipment(models.Model):
     next_cal = models.DateField(verbose_name='Дата следующей калибровки (поверки)')
     cal_organisation = models.CharField(max_length=200, verbose_name='Организация, проводящая калибровку (поверку)')
 
+    history = HistoricalRecords()
+
     def __str__(self):
         return self.name
 
@@ -59,6 +63,8 @@ class TechnicalMaintenance(models.Model):
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name='maintenance',
                                   verbose_name='Относится к оборудованию')
 
+    history = HistoricalRecords()
+
     def __str__(self):
         return f'{self.name}, {self.type}'
 
@@ -73,6 +79,8 @@ class Contract(models.Model):
     date_conclusion = models.DateField(verbose_name='Дата заключения')
     date_end = models.DateField(verbose_name='Дата окончания')
     file_contract = models.FileField(blank=True, null=True, verbose_name='Файл договора (скан)')
+
+    history = HistoricalRecords()
 
     def __str__(self):
         return f'Договор {self.number} с «{self.contragent}»'
@@ -97,6 +105,8 @@ class Protocol(models.Model):
     file_protocol = models.FileField(blank=True, null=True, verbose_name='Файл протокола')
     file_act = models.FileField(blank=True, null=True, verbose_name='Файл акта')
     close_date = models.DateTimeField(verbose_name='Дата закрытия')
+
+    history = HistoricalRecords()
 
     def __str__(self):
         return f'Протокол {self.number}'
@@ -123,6 +133,8 @@ class Bid(models.Model):
     status = models.CharField(choices=[('c', 'Исполнена'), ('r', 'Отклонена'),
                                        ('p', 'Выполняется')], max_length=60, default='p', verbose_name='Статус')
 
+    history = HistoricalRecords()
+
     def __str__(self):
         return f'Заявка {self.number} ({self.get_status_display()})'
 
@@ -135,6 +147,8 @@ class Invoice(models.Model):
     number = models.CharField(max_length=200, verbose_name='Номер счёта')
     status = models.CharField(choices=[('p', 'Оплачен'), ('b', 'Задолженность'),
                                        ('w', 'В процессе')], max_length=60, default='w', verbose_name='Статус')
+
+    history = HistoricalRecords()
 
     def __str__(self):
         return f'Счёт {self.number} ({self.get_status_display()})'
@@ -154,6 +168,8 @@ class Record(models.Model):
     text = models.TextField(max_length=5000, verbose_name='Текст записи')
     file = models.FileField(upload_to=notebook_record_file_path, blank=True, verbose_name='Приложенный файл')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+
+    history = HistoricalRecords()
 
     @property
     def file_record_url(self):
