@@ -326,7 +326,7 @@ class AuditTrailView(LoginRequiredMixin, TemplateView):
                         field_names = {}
                         for field in item._meta.get_fields():
                             if hasattr(field, 'verbose_name'):
-                                temp = {k: v for k, v in [(field.verbose_name, history_record.__dict__.get(field.name))]}
+                                temp = {k: v for k, v in [(field.verbose_name, getattr(item, field.name))]}
                                 field_names.update(temp)
                         fields[history_record] = field_names
                     if fields:
