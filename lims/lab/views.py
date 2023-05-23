@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import ManyToManyField
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
@@ -322,15 +323,24 @@ class AuditTrailView(LoginRequiredMixin, TemplateView):
             for item in model.objects.all():
                 fields = {}
                 if hasattr(item, 'history'):
-                    for history_record in item.history.all():
-                        field_names = {}
-                        for field in item._meta.get_fields():
-                            if hasattr(field, 'verbose_name'):
-                                temp = {k: v for k, v in [(field.verbose_name, getattr(item, field.name))]}
-                                field_names.update(temp)
-                        fields[history_record] = field_names
-                    if fields:
-                        changed_records[item.name] = fields
+                    if hasattr(item.history, 'all'):
+                        for history_record in item.history.all():
+                            field_names = {}
+                            for field in item._meta.get_fields():
+                                if hasattr(field, 'verbose_name'):
+                                    if isinstance(field, ManyToManyField):
+                                        previous_record = history_record.prev_record
+                                        if previous_record:
+                                            delta = history_record.diff_against(previous_record)
+                                            for change in delta.changes:
+                                                print(change.new)
+                                                last_m2m = {change.field: change.new}
+                                                field_names.update(last_m2m)
+                                    else:
+                                        temp = {k: v for k, v in [(field.verbose_name, getattr(history_record, field.name))]}
+                                        field_names.update(temp)
+                            fields[history_record] = field_names
+                        if fields:
+                            changed_records[item.name] = fields
         context['constructed_history'] = changed_records
         return context
-
