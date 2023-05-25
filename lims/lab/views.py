@@ -266,7 +266,7 @@ class MaintenanceCreateView(LoginRequiredMixin, CreateView):
     #     else:
     #         context['form'] = self.form_class
 
-        # return render(request, self.template_name, context)
+    # return render(request, self.template_name, context)
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
@@ -332,12 +332,22 @@ class AuditTrailView(LoginRequiredMixin, TemplateView):
                                         previous_record = history_record.prev_record
                                         if previous_record:
                                             delta = history_record.diff_against(previous_record)
-                                            for change in delta.changes:
-                                                print(change.new)
-                                                last_m2m = {change.field: change.new}
-                                                field_names.update(last_m2m)
+                                        else:
+                                            delta = history_record.diff_against(history_record)
+                                        for change in delta.changes:
+                                            if isinstance(change.new, list) and field.name == change.field:
+                                                last_m2m = {field.verbose_name: change.new}
+                                                for changed_m2m_field in last_m2m.get(field.verbose_name):
+                                                    m2m_values = {}
+                                                    for name, pk in changed_m2m_field.items():
+                                                        m2m_model = apps.get_model('lab', name)
+                                                        if m2m_model != model:
+                                                            m2m_values[m2m_model._meta.verbose_name + ' id' + str(
+                                                                pk)] = m2m_model.objects.get(pk=pk)
+                                                            field_names.update(m2m_values)
                                     else:
-                                        temp = {k: v for k, v in [(field.verbose_name, getattr(history_record, field.name))]}
+                                        temp = {k: v for k, v in
+                                                [(field.verbose_name, getattr(history_record, field.name))]}
                                         field_names.update(temp)
                             fields[history_record] = field_names
                         if fields:
