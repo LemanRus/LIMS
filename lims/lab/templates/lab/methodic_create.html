@@ -11,8 +11,8 @@
         <p>Название: {{form.name}}</p>
         <p>Введена с: {{form.acts_from}}</p>
         <p>Действует до: {{form.acts_to}}</p>
-        <p>Используемые реагенты: {{form.used_reagents}} Не нашли в списке? <a href="#">Добавить</a></p>
-        <p>Используемое оборудование: {{form.used_equipment}} Не нашли в списке? <a href="#">Добавить</a></p>
+        <p>Используемые реагенты: {{form.used_reagents}} Не нашли в списке? <a href="{% url 'lab:reagent_create' %}">Добавить</a></p>
+        <p>Используемое оборудование: {{form.used_equipment}} Не нашли в списке? <a href="{% url 'lab:equipment_create' %}">Добавить</a></p>
         <input type="submit" value="OK">
     </form>
 {% endblock content %}
