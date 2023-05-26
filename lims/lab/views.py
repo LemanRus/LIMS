@@ -332,6 +332,8 @@ class AuditTrailView(LoginRequiredMixin, TemplateView):
                                         previous_record = history_record.prev_record
                                         if previous_record:
                                             delta = history_record.diff_against(previous_record)
+                                        else:
+                                            delta = history_record.diff_against(history_record)
                                         for change in delta.changes:
                                             if isinstance(change.new, list) and field.name == change.field:
                                                 last_m2m = {field.verbose_name: change.new}
