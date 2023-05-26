@@ -353,7 +353,9 @@ class AuditTrailView(LoginRequiredMixin, TemplateView):
                         if fields:
                             if hasattr(item, 'name'):
                                 changed_records[item.name] = fields
-                            else:
+                            elif hasattr(item, 'number'):
                                 changed_records[str(item.number)] = fields
+                            else:
+                                changed_records["Значение для id " + str(item.pk)] = fields
         context['constructed_history'] = changed_records
         return context
