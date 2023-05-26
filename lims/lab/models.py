@@ -93,9 +93,14 @@ class Contract(models.Model):
         verbose_name_plural = 'Договоры'
 
 
+def get_default_author():
+    return CustomUser.objects.first().pk
+
+
 class Protocol(models.Model):
+
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='protocols',
-                               default=CustomUser.objects.first().pk, verbose_name='Автор')
+                               default=get_default_author(), verbose_name='Автор')
     contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='protocols', verbose_name='К договору')
     number = models.CharField(max_length=200, verbose_name='Номер протокола')
     act_number = models.CharField(max_length=200, verbose_name='Номер акта')
@@ -107,6 +112,7 @@ class Protocol(models.Model):
     history = HistoricalRecords()
 
     def __str__(self):
+        print(get_default_author())
         return f'Протокол {self.number}'
 
     @property
