@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, OperationalError
 
 from core.models import CustomUser
 from simple_history.models import HistoricalRecords
@@ -94,7 +94,12 @@ class Contract(models.Model):
 
 
 def get_default_author():
-    return CustomUser.objects.first().pk
+    try:
+        return CustomUser.objects.first().pk
+    except OperationalError:
+        return None
+    except AttributeError:
+        return None
 
 
 class Protocol(models.Model):
@@ -112,7 +117,7 @@ class Protocol(models.Model):
     history = HistoricalRecords()
 
     def __str__(self):
-        print(get_default_author())
+        print(get_default_author)
         return f'Протокол {self.number}'
 
     @property

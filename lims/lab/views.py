@@ -349,6 +349,9 @@ class AuditTrailView(LoginRequiredMixin, TemplateView):
                                         field_names.update(temp)
                             fields[history_record] = field_names
                         if fields:
-                            changed_records[item.name] = fields
+                            if hasattr(item, 'name'):
+                                changed_records[item.name] = fields
+                            else:
+                                changed_records[str(item.number)] = fields
         context['constructed_history'] = changed_records
         return context
