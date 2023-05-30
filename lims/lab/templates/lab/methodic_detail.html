@@ -6,10 +6,13 @@
 
 {% block content %}
     <h2>{{methodic.name}}</h2>
-    <p>{{methodic.acts_from}}</p>
-    <p>{{methodic.acts_to}}</p>
+    <p>Введена: {{methodic.acts_from}}</p>
+    <p>Действует до:{{methodic.acts_to}}</p>
+    <p>Используемые реагенты:</p>
+    <ul>
     {% for reagent in methodic.used_reagents.all %}
-        <p>{{reagent.name}}</p>
+        <li><a href="{% url 'lab:reagent_detail' reagent.pk %}">{{reagent.name}}</a></li>
     {% endfor %}
+    </ul>
     <a href="{% url 'lab:methodic_update' methodic.id %}">Редактировать</a>
 {% endblock content %}
