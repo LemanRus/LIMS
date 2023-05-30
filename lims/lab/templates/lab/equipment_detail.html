@@ -1,18 +1,23 @@
 {% extends "lab/base.html" %}
 
 {% block title %}
-    {{equipment.name}}
+    Оборудование: {{ equipment.name }}
 {% endblock title %}
 
 {% block content %}
-    <h2>{{equipment.name}}</h2>
-    <p>{{equipment.last_cal}}</p>
-    <p>{{equipment.next_cal}}</p>
-    <p>{{equipment.cal_organisation}}</p>
-    {% for maintenance in equipment.maintenance.all %}
-        <p>{{maintenance.name}}</p>
-        <p>{{maintenance.type}}</p>
-    {% endfor %}
+    <h1>Оборудование: {{ equipment.name }}</h1>
+    <p>Дата последней поверки (калибровки): {{ equipment.last_cal }}</p>
+    <p>Дата следующей поверки (калибровки): {{ equipment.next_cal }}</p>
+    <p>Организация-поверитель: {{ equipment.cal_organisation }}</p>
+    <p>Техобслуживание для данного прибора:</p>
+    <ul>
+        {% for maintenance in equipment.maintenance.all %}
+            <li>
+                <p>{{ maintenance.name }}</p>
+                <p>{{ maintenance.type }}, следующее в: {{ maintenance.next_date }}</p>
+            </li>
+        {% endfor %}
+    </ul>
     <p><a href="{% url 'lab:maintenance_create' %}?equipment={{ equipment.id }}">Добавить техобслуживание</a></p>
     <p><a href="{% url 'lab:equipment_update' equipment.id %}">Редактировать</a></p>
 {% endblock content %}
