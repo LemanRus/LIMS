@@ -5,12 +5,15 @@
 {% endblock title %}
 
 {% block content %}
-    <h2>{{reagent.name}}</h2>
-    <p>{{reagent.made_by}}</p>
-    <p>{{reagent.made_date}}</p>
-    <p>{{reagent.best_before}}</p>
+    <h1>{{reagent.name}}</h1>
+    <p>Изготовитель: {{reagent.made_by}}</p>
+    <p>Дата изготовления: {{reagent.made_date}}</p>
+    <p>Годен до: {{reagent.best_before}}</p>
+    <p>Испольуется в методиках:</p>
+    <ul>
     {% for methodic in reagent.methodics.all %}
-        <p>{{methodic.name}}</p>
+        <li><a href="{% url 'lab:methodic_detail' methodic.pk %}">{{methodic.name}}</a></li>
     {% endfor %}
+    </ul>
     <a href="{% url 'lab:reagent_update' reagent.id %}">Редактировать</a>
 {% endblock content %}

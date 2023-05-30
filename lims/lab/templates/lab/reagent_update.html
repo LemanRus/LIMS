@@ -7,6 +7,7 @@
 {% block content %}
     <form action="{% url 'lab:reagent_update' reagent.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <h1>Редактирование реактива: {{ reagent.name }}</h1>
         {{ form.as_p }}
         <input type="submit" value="OK">
     </form>
