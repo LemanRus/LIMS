@@ -7,6 +7,7 @@
 {% block content %}
     <form action="{% url 'lab:methodic_update' methodic.id%}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <h1>Редактирование методики: {{ methodic.name }}</h1>
         <p>{{form.errors}}</p>
         <p>Название: {{form.name}}</p>
         <p>Введена с: {{form.acts_from}}</p>
