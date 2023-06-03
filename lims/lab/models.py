@@ -29,6 +29,8 @@ class Reagent(models.Model):
     made_date = models.DateField(blank=True, null=True, verbose_name='Дата производства')
     best_before = models.DateField(blank=True, null=True, verbose_name='Годен до')
 
+    history = HistoricalRecords()
+
     def __str__(self):
         return self.name
 
