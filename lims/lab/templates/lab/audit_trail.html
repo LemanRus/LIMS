@@ -9,21 +9,42 @@
 {% block content %}
     <section class="container">
         <h1 class="text-center py-4">Аудиторский след</h1>
-        {% for instance, history in constructed_history|sort_dict %}
-            {% for history_record, fields in history.items %}
-                <h5>{{ instance }}
-                    {% if history_record.history_type == '~' %}
-                        был изменён
-                    {% elif history_record.history_type == '+' %}
-                        был создан
-                    {% endif %}
-                    {{ history_record.history_date }}
-                    пользователем {{ history_record.history_user }}</h5>
-                <h6>Записанные значения:</h6>
-                {% for field_name, value in fields.items %}
-                    <p>{{ field_name }}: {{ value }}</p>
-                {% endfor %}
-            {% endfor %}
+        {% for record in constructed_history %}
+            <p>{{ record }}</p>
         {% endfor %}
+
+        {#        {% for instance, history in constructed_history|sort_dict %}#}
+        {#            {% for history_record, fields in history.items %}#}
+        {#                <h5>{{ instance }}#}
+        {#                    {% if history_record.history_type == '~' %}#}
+        {#                        был изменён#}
+        {#                    {% elif history_record.history_type == '+' %}#}
+        {#                        был создан#}
+        {#                    {% endif %}#}
+        {#                    {{ history_record.history_date }}#}
+        {#                    пользователем {{ history_record.history_user }}</h5>#}
+        {#                <h6>Записанные значения:</h6>#}
+        {#                {% for field_name, value in fields.items %}#}
+        {#                    <p>{{ field_name }}: {{ value }}</p>#}
+        {#                {% endfor %}#}
+        {#            {% endfor %}#}
+        {#        {% endfor %}#}
     </section>
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
 {% endblock content %}

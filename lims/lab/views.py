@@ -312,19 +312,21 @@ class RecordCreateView(LoginRequiredMixin, CreateView):
             return render(request, self.template_name, context)
 
 
-class AuditTrailView(LoginRequiredMixin, TemplateView):
+class AuditTrailView(LoginRequiredMixin, ListView):
     template_name = 'lab/audit_trail.html'
     login_url = '/login'
+    context_object_name = 'constructed_history'
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        changed_records = {}
+    def get_queryset(self, **kwargs):
+        construct = []
         for model in apps.get_models():
             for item in model.objects.all():
-                fields = {}
+                changed_records = {}
                 if hasattr(item, 'history'):
                     if hasattr(item.history, 'all'):
                         for history_record in item.history.all():
+                            fields = {}
                             field_names = {}
                             for field in item._meta.get_fields():
                                 if hasattr(field, 'verbose_name'):
@@ -350,12 +352,12 @@ class AuditTrailView(LoginRequiredMixin, TemplateView):
                                                 [(field.verbose_name, getattr(history_record, field.name))]}
                                         field_names.update(temp)
                             fields[history_record] = field_names
-                        if fields:
-                            if hasattr(item, 'name'):
-                                changed_records[item.name] = fields
-                            elif hasattr(item, 'number'):
-                                changed_records[str(item.number)] = fields
-                            else:
-                                changed_records["Значение для id " + str(item.pk)] = fields
-        context['constructed_history'] = changed_records
-        return context
+                            construct.append(fields)
+                            # if fields:
+                            #     if hasattr(item, 'name'):
+                            #         changed_records[item.name] = fields
+                            #     elif hasattr(item, 'number'):
+                            #         changed_records[str(item.number)] = fields
+                            #     else:
+                            #         changed_records["Значение для id " + str(item.pk)] = fields
+        return sorted(construct, key=lambda x: list(x.items())[0][0].history_date, reverse=True)
