@@ -7,7 +7,7 @@
 {% block content %}
     <h1>Методики</h1>
     {% for methodic in methodics %}
-        <a href="{% url 'lab:methodic_detail' methodic.id %}">{{methodic.name}}</a>
+        <h5><a href="{% url 'lab:methodic_detail' methodic.id %}">{{methodic.name}}</a></h5>
         <p>Действует до: {{methodic.acts_to}}</p>
     {% endfor %}
     <a href="{% url 'lab:methodic_create' %}">Добавить методику</a>

@@ -7,7 +7,7 @@
 {% block content %}
     <h1>Протоколы</h1>
     {% for protocol in protocols %}
-        <p><a href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{ protocol.number }}</a></p>
+        <h5><a href="{% url 'lab:protocol_detail' protocol.id %}">Протокол {{ protocol.number }}</a></h5>
     {% endfor %}
     <a href="{% url 'lab:protocol_create' %}">Добавить протокол</a>
 {% endblock content %}

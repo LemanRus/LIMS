@@ -7,7 +7,7 @@
 {% block content %}
     <h1>Заявки</h1>
     {% for bid in bids %}
-        <a href="{% url 'lab:bid_detail' bid.id %}">Заявка {{bid.number}}</a>
+        <h5>Заявка <a href="{% url 'lab:bid_detail' bid.id %}">{{bid.number}}</a></h5>
         <p>К договору: <a href="{% url 'lab:contract_detail' bid.contract.pk %}">{{bid.contract.number}}</a></p>
     {% endfor %}
     <a href="{% url 'lab:bid_create' %}">Добавить заявку</a>

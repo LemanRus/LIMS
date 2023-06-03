@@ -7,7 +7,7 @@
 {% block content %}
     <h1>Счета</h1>
     {% for invoice in invoices %}
-        <p>Счёт <a href="{% url 'lab:invoice_detail' invoice.id %}">{{invoice.number}}</a></p>
+        <h5>Счёт <a href="{% url 'lab:invoice_detail' invoice.id %}">{{invoice.number}}</a></h5>
         <p>Статус: {{ invoice.get_status_display }}</p>
     {% endfor %}
         <a href="{% url 'lab:invoice_create' %}">Добавить счёт</a>
