@@ -307,10 +307,6 @@ class AuditTrailView(LoginRequiredMixin, ListView):
                 if hasattr(item, 'history'):
                     if hasattr(item.history, 'all'):
                         for history_record in item.history.all():
-                            print(dir(history_record))
-                            print(history_record.get_history_type_display())
-                            print(history_record.history_object.__class__)
-                            print(history_record.instance_type)
                             fields = {}
                             field_names = {}
                             for field in item._meta.get_fields():
