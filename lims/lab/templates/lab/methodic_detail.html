@@ -1,18 +1,24 @@
 {% extends "lab/base.html" %}
 
 {% block title %}
-    Методика {{methodic.name}}
+    Методика {{ methodic.name }}
 {% endblock title %}
 
 {% block content %}
-    <h1>Методика: {{methodic.name}}</h1>
-    <p>Введена: {{methodic.acts_from}}</p>
-    <p>Действует до:{{methodic.acts_to}}</p>
+    <h1>Методика: {{ methodic.name }}</h1>
+    <p>Введена: {{ methodic.acts_from }}</p>
+    <p>Действует до:{{ methodic.acts_to }}</p>
     <p>Используемые реагенты:</p>
     <ul>
-    {% for reagent in methodic.used_reagents.all %}
-        <li><a href="{% url 'lab:reagent_detail' reagent.pk %}">{{reagent.name}}</a></li>
-    {% endfor %}
+        {% for reagent in methodic.used_reagents.all %}
+            <li><a href="{% url 'lab:reagent_detail' reagent.pk %}">{{ reagent.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <p>Используемое оборудование:</p>
+    <ul>
+        {% for equipment in methodic.used_equipment.all %}
+            <li><a href="{% url 'lab:equipment_detail' equipment.pk %}">{{ equipment.name }}</a></li>
+        {% endfor %}
     </ul>
     <a href="{% url 'lab:methodic_update' methodic.id %}">Редактировать</a>
 {% endblock content %}
