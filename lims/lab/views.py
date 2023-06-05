@@ -250,24 +250,6 @@ class MaintenanceCreateView(LoginRequiredMixin, CreateView):
         context = {'form': self.form_class(initial=request.GET)}
         return render(request, self.template_name, context)
 
-    # def post(self, request, *args, **kwargs):
-    #     form = self.form_class(request.POST, request.FILES)
-    #     context = {}
-    #     if form.is_valid():
-    #         maintenance = form.save(commit=False)
-    #         maintenance.save()
-    #         print(form.cleaned_data)
-    #         for eq in form.cleaned_data.get('equipment'):
-    #             eq.maintenance.add(*TechnicalMaintenance.objects.filter(pk=maintenance.pk))
-    #             print(maintenance)
-    #             eq.save()
-    #         context['form'] = self.form_class
-    #         return redirect(reverse('lab:equipment'))
-    #     else:
-    #         context['form'] = self.form_class
-
-    # return render(request, self.template_name, context)
-
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'lab/dashboard.html'
@@ -316,16 +298,19 @@ class AuditTrailView(LoginRequiredMixin, ListView):
     template_name = 'lab/audit_trail.html'
     login_url = '/login'
     context_object_name = 'constructed_history'
-    paginate_by = 10
+    paginate_by = 30
 
     def get_queryset(self, **kwargs):
         construct = []
         for model in apps.get_models():
             for item in model.objects.all():
-                changed_records = {}
                 if hasattr(item, 'history'):
                     if hasattr(item.history, 'all'):
                         for history_record in item.history.all():
+                            print(dir(history_record))
+                            print(history_record.get_history_type_display())
+                            print(history_record.history_object.__class__)
+                            print(history_record.instance_type)
                             fields = {}
                             field_names = {}
                             for field in item._meta.get_fields():
@@ -335,7 +320,7 @@ class AuditTrailView(LoginRequiredMixin, ListView):
                                         if previous_record:
                                             delta = history_record.diff_against(previous_record)
                                         else:
-                                            delta = history_record.diff_against(history_record)
+                                            delta = history_record.diff_against(history_record) #заглушка, я знаю
                                         for change in delta.changes:
                                             if isinstance(change.new, list) and field.name == change.field:
                                                 last_m2m = {field.verbose_name: change.new}
@@ -353,11 +338,4 @@ class AuditTrailView(LoginRequiredMixin, ListView):
                                         field_names.update(temp)
                             fields[history_record] = field_names
                             construct.append(fields)
-                            # if fields:
-                            #     if hasattr(item, 'name'):
-                            #         changed_records[item.name] = fields
-                            #     elif hasattr(item, 'number'):
-                            #         changed_records[str(item.number)] = fields
-                            #     else:
-                            #         changed_records["Значение для id " + str(item.pk)] = fields
         return sorted(construct, key=lambda x: list(x.items())[0][0].history_date, reverse=True)

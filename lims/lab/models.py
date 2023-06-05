@@ -32,7 +32,7 @@ class Reagent(models.Model):
     history = HistoricalRecords()
 
     def __str__(self):
-        return self.name
+        return f'Реактив "{self.name}"'
 
     class Meta:
         verbose_name = 'Реактив'
@@ -48,7 +48,7 @@ class Equipment(models.Model):
     history = HistoricalRecords()
 
     def __str__(self):
-        return self.name
+        return f'Оборудование "{self.name}"'
 
     class Meta:
         verbose_name = 'Оборудование'
@@ -181,6 +181,9 @@ class Record(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     history = HistoricalRecords()
+
+    def __str__(self):
+        return f'Запись от {self.date_created}'
 
     @property
     def file_record_url(self):

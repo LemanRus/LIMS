@@ -10,7 +10,9 @@
     <section class="container">
         <h1 class="text-center py-4">Аудиторский след</h1>
         {% for record in constructed_history %}
-            <p>{{ record }}</p>
+            {% for history, fields in record.items %}
+                <p>{{ history.instance }}</p>
+            {% endfor %}
         {% endfor %}
 
         {#        {% for instance, history in constructed_history|sort_dict %}#}
