@@ -13,7 +13,7 @@ class Methodic(models.Model):
     used_equipment = models.ManyToManyField('Equipment', blank=True, related_name='methodics',
                                             verbose_name='Используемое оборудование')
 
-    history = HistoricalRecords(m2m_fields=[used_reagents])
+    history = HistoricalRecords(m2m_fields=[used_reagents, used_equipment])
 
     def __str__(self):
         return f'Методика "{self.name}"'
