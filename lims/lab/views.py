@@ -298,7 +298,7 @@ class AuditTrailView(LoginRequiredMixin, ListView):
     template_name = 'lab/audit_trail.html'
     login_url = '/login'
     context_object_name = 'constructed_history'
-    paginate_by = 30
+    paginate_by = 10
 
     def get_queryset(self, **kwargs):
         construct = []

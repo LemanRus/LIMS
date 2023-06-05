@@ -11,7 +11,18 @@
         <h1 class="text-center py-4">Аудиторский след</h1>
         {% for record in constructed_history %}
             {% for history, fields in record.items %}
-                <p>{{ history.instance }}</p>
+                <h5>{{ history.instance }}
+                    {% if history.history_type == '~' %}
+                        был изменён
+                    {% elif history.history_type == '+' %}
+                        был создан
+                    {% endif %}
+                    {{ history.history_date }}
+                    пользователем {{ history.history_user }}</h5>
+                <h6>Записанные значения:</h6>
+                {% for field_name, value in fields.items %}
+                    <p>{{ field_name }}: {{ value }}</p>
+                {% endfor %}
             {% endfor %}
         {% endfor %}
 
