@@ -5,15 +5,16 @@
 {% endblock title %}
 
 {% block content %}
-    <section class="wrapper">
+    <section class="container">
         <h2>Войти:</h2>
-        <div class="center-div">
-            <form method="post" class="right-form">
+        <div class="w-25">
+            <form method="post" class="form-control end-0">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Login</button>
             </form>
-            <a href="{% url 'core:password_reset' %}">Забыли пароль?</a>
         </div>
+
+        <a href="{% url 'core:password_reset' %}">Забыли пароль?</a>
     </section>
 {% endblock content %}
