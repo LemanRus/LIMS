@@ -1,16 +1,83 @@
 # LIMS
 
-## A very, very simple laboratory information management system. Nothing but LIMS.
+## Описание
 
-This LIMS is useful for laboratory assistants and engineers who don't want to manually fill out huge and boring lab books, keep tedious records, and keep track of expiration dates.
+**LIMS** (Laboratory Information Management System) - это очень простой и удобный в использовании инструмент для управления лабораторной информацией. Этот LIMS создан для лаборантов и инженеров, которые хотят избежать рутинного заполнения огромных лабораторных журналов, утомительных записей и отслеживания сроков годности реагентов.
 
-## Installation
+## Особенности
 
-You need to download the code, configure virtual environment or docker container, install requirements and proceed as for regular Django project.
+- **Автоматический аудит:** Автоматическое ведение журнала всех изменений.
+- **Преднастроенная админ-панель:** Удобная админ-панель для управления системой.
+- **Лёгкий и простой дизайн:** Интерфейс, который легко освоить и использовать.
+- **Поддержка русскоязычных лабораторий:** Система готова к использованию в русскоязычных лабораториях.
 
-## Features
+## Установка
 
-- Automatic audit trail
-- Preconfigured admin site
-- Lightweight and simple design
-- Russian-lab-ready system
+### Требования
+
+- Python 3.x
+- Django 3.x
+- Virtualenv (рекомендуется) или Docker
+
+### Шаги по установке
+
+#### С использованием виртуального окружения
+
+1. Скачайте код проекта:
+    ```bash
+    git clone https://github.com/LemanRus/LIMS
+    cd LIMS
+    ```
+
+2. Создайте и активируйте виртуальное окружение:
+    ```bash
+    python3 -m venv env
+    source env/bin/activate  # Для Windows: .\env\Scripts\activate
+    ```
+
+3. Установите необходимые зависимости:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. Выполните миграции базы данных:
+    ```bash
+    python manage.py migrate
+    ```
+
+5. Создайте суперпользователя для доступа к админ-панели:
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+6. Запустите сервер разработки:
+    ```bash
+    python manage.py runserver
+    ```
+
+7. Откройте браузер и перейдите по адресу [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin), чтобы войти в админ-панель.
+
+#### С использованием Docker
+
+1. Скачайте код проекта:
+    ```bash
+    git clone https://github.com/LemanRus/LIMS
+    cd LIMS
+    ```
+
+2. Постройте и запустите контейнеры:
+    ```bash
+    docker-compose up --build
+    ```
+
+3. Выполните миграции базы данных:
+    ```bash
+    docker-compose run web python manage.py migrate
+    ```
+
+4. Создайте суперпользователя для доступа к админ-панели:
+    ```bash
+    docker-compose run web python manage.py createsuperuser
+    ```
+
+5. Откройте браузер и перейдите по адресу [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin), чтобы войти в админ-панель.
